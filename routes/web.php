@@ -22,6 +22,9 @@
 	Route::get('/home/captcha','Home\LoginController@captcha')->name('hcaptcha');
 	Route::post('/home/dologin','Home\LoginController@dologin');
 	Route::get('/home/logout','Home\LoginController@logout')->name('logout');
+	//前台列表页
+	Route::get('/home/list/{id}','Home\ListController@index');
+
 
 	//后台登录
 	Route::get('/admin/login','Admin\LoginController@login');

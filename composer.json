@@ -28,7 +28,8 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Library/category.php"
+            "app/Library/category.php",
+            "app/Library/type.php"
         ]
 
     },

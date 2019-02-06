@@ -73,101 +73,41 @@
           <!-- Navbar Collapse -->
           <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="navbar-nav mx-auto">
-              <li class="nav-item dropdown"><a id="homeDropdownMenuLink" href="index.html" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link active">
-                   
-                  Home<i class="fa fa-angle-down"></i></a>
-                <div aria-labelledby="homeDropdownMenuLink" class="dropdown-menu"><a href="index.html" class="dropdown-item">Fullscreen home + Lookbook</a><a href="index2.html" class="dropdown-item">Split-screen home</a><a href="index3.html" class="dropdown-item">Classic home</a><a href="index4.html" class="dropdown-item">Parallax sections <span class="badge badge-info ml-1">New</span></a><a href="index5.html" class="dropdown-item">Slider + broken grid <span class="badge badge-info ml-1">New</span>    </a></div>
-              </li>
-              <li class="nav-item"><a href="category.html" class="nav-link">Shop</a>
-              </li>
               <!-- Megamenu-->
-              <li class="nav-item dropdown position-static"><a href="#" data-toggle="dropdown" class="nav-link">Template<i class="fa fa-angle-down"></i></a>
+
+              @php
+                use App\Http\Model\Admin\Type;
+                $type = Type::where('pid',0)->get();
+              @endphp
+
+              @foreach($type as $k => $v)
+              @if($v['pid'] == 0)
+              <li class="nav-item dropdown position-static"><a href="#" data-toggle="dropdown" class="nav-link">{{$v['name']}}<i class="fa fa-angle-down"></i></a>
                 <div class="dropdown-menu megamenu py-lg-0">
                   <div class="row">
                     <div class="col-lg-9">
+                      @php
+                      $pid = $v['id'];
+                      $type2 = Type::where('pid',$pid)->get();        
+                      @endphp
                       <div class="row p-3 pr-lg-0 pl-lg-5 pt-lg-5">
-                        <div class="col-lg-3">
+                        @foreach($type2 as $key => $val)
+                        <div class="col-lg-2">
                           <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Homepage</h6>
+                          <h6 class="text-uppercase">{{$val['name']}}</h6>
                           <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a href="index.html" class="megamenu-list-link">Fullscreen home + Lookbook   </a></li>
-                            <li class="megamenu-list-item"><a href="index2.html" class="megamenu-list-link">Split-screen home   </a></li>
-                            <li class="megamenu-list-item"><a href="index3.html" class="megamenu-list-link">Classic home   </a></li>
-                            <li class="megamenu-list-item"><a href="index4.html" class="megamenu-list-link">Parallax sections  <span class="badge badge-info ml-1">New</span>   </a></li>
-                            <li class="megamenu-list-item"><a href="index5.html" class="megamenu-list-link">Slider + Broken grid  <span class="badge badge-info ml-1">New</span>   </a></li>
-                          </ul>
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Shop</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a href="category.html" class="megamenu-list-link">Category - left sidebar   </a></li>
-                            <li class="megamenu-list-item"><a href="category-right.html" class="megamenu-list-link">Category - right sidebar   </a></li>
-                            <li class="megamenu-list-item"><a href="category-no-sidebar.html" class="megamenu-list-link">Category - no sidebar   </a></li>
-                            <li class="megamenu-list-item"><a href="category-full.html" class="megamenu-list-link">Category - full width   </a></li>
-                            <li class="megamenu-list-item"><a href="category-masonry.html" class="megamenu-list-link">Category - masonry items   </a></li>
-                            <li class="megamenu-list-item"><a href="category-banner.html" class="megamenu-list-link">Category - w/ banner   </a></li>
-                            <li class="megamenu-list-item"><a href="detail.html" class="megamenu-list-link">Product detail   </a></li>
-                            <li class="megamenu-list-item"><a href="detail-2.html" class="megamenu-list-link">Product detail - v.2   </a></li>
+                            @php
+                              $pid = $val['id'];
+                              $type3 = Type::where('pid',$pid)->get();
+                            @endphp
+                            @foreach($type3 as $ke => $va)
+                            <li class="megamenu-list-item"><a href="/home/list/{{$va['id']}}" class="megamenu-list-link">{{$va['name']}}</a></li>
+                            @endforeach
                           </ul>
                         </div>
-                        <div class="col-lg-3">
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Order process</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a href="cart.html" class="megamenu-list-link">Shopping cart   </a></li>
-                            <li class="megamenu-list-item"><a href="cart-2.html" class="megamenu-list-link">Shopping cart - v. 2 <span class="badge badge-info ml-1">New</span>   </a></li>
-                            <li class="megamenu-list-item"><a href="checkout1.html" class="megamenu-list-link">Checkout 1 - Address   </a></li>
-                            <li class="megamenu-list-item"><a href="checkout2.html" class="megamenu-list-link">Checkout 2 - Delivery   </a></li>
-                            <li class="megamenu-list-item"><a href="checkout3.html" class="megamenu-list-link">Checkout 3 - Payment   </a></li>
-                            <li class="megamenu-list-item"><a href="checkout4.html" class="megamenu-list-link">Checkout 4 - Review     </a></li>
-                            <li class="megamenu-list-item"><a href="checkout5.html" class="megamenu-list-link">Checkout 5 - Confirmation   </a></li>
-                          </ul>
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Blog</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a href="blog.html" class="megamenu-list-link">Blog   </a></li>
-                            <li class="megamenu-list-item"><a href="post.html" class="megamenu-list-link">Post   </a></li>
-                          </ul>
-                        </div>
-                        <div class="col-lg-3">
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Pages</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a href="contact.html" class="megamenu-list-link">Contact   </a></li>
-                            <li class="megamenu-list-item"><a href="contact-2.html" class="megamenu-list-link">Contact v.2   </a></li>
-                            <li class="megamenu-list-item"><a href="text.html" class="megamenu-list-link">Text page   </a></li>
-                            <li class="megamenu-list-item"><a href="faq.html" class="megamenu-list-link">F.A.Q.s  <span class="badge badge-info ml-1">New</span>   </a></li>
-                            <li class="megamenu-list-item"><a href="coming-soon.html" class="megamenu-list-link">Coming soon   </a></li>
-                          </ul>
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Customer</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a href="customer-login.html" class="megamenu-list-link">Login/sign up   </a></li>
-                            <li class="megamenu-list-item"><a href="customer-orders.html" class="megamenu-list-link">Orders   </a></li>
-                            <li class="megamenu-list-item"><a href="customer-order.html" class="megamenu-list-link">Order detail   </a></li>
-                            <li class="megamenu-list-item"><a href="customer-addresses.html" class="megamenu-list-link">Addresses   </a></li>
-                            <li class="megamenu-list-item"><a href="customer-account.html" class="megamenu-list-link">Profile   </a></li>
-                          </ul>
-                        </div>
-                        <div class="col-lg-3">
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Documentation</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a href="docs/docs-introduction.html" class="megamenu-list-link">Introduction   </a></li>
-                            <li class="megamenu-list-item"><a href="docs/docs-directory-structure.html" class="megamenu-list-link">Directory structure   </a></li>
-                            <li class="megamenu-list-item"><a href="docs/docs-gulp.html" class="megamenu-list-link">Gulp   </a></li>
-                            <li class="megamenu-list-item"><a href="docs/docs-customizing-css.html" class="megamenu-list-link">Customizing CSS   </a></li>
-                            <li class="megamenu-list-item"><a href="docs/docs-credits.html" class="megamenu-list-link">Credits   </a></li>
-                            <li class="megamenu-list-item"><a href="docs/docs-changelog.html" class="megamenu-list-link">Changelog   </a></li>
-                          </ul>
-                          <!-- Megamenu list-->
-                          <h6 class="text-uppercase">Components</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a href="docs/components-bootstrap.html" class="megamenu-list-link">Bootstrap   </a></li>
-                            <li class="megamenu-list-item"><a href="docs/components-sell.html" class="megamenu-list-link">Theme   </a></li>
-                            <li class="megamenu-list-item"><a href="component-variants/header.html" class="megamenu-list-link">Header variants <span class="badge badge-info ml-1">New</span>   </a></li>
-                          </ul>
-                        </div>
+                        @endforeach  
                       </div>
+
                       <div class="row megamenu-services d-none d-lg-flex">
                         <div class="col-xl-3 col-lg-6 d-flex">
                           <div class="megamenu-services-item">
@@ -219,42 +159,13 @@
                   </div>
                 </div>
               </li>
+              @endif
+              @endforeach
               <!-- /Megamenu end-->
-              <!-- Multi level dropdown    -->
-              <li class="nav-item dropdown"><a id="navbarDropdownMenuLink" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link">Dropdown<i class="fa fa-angle-down"></i></a>
-                <ul aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
-                  <li><a href="#" class="dropdown-item">Action</a></li>
-                  <li><a href="#" class="dropdown-item">Another action</a></li>
-                  <li class="dropdown-submenu"><a id="navbarDropdownMenuLink2" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">Dropdown link<i class="fa fa-angle-down ml-2"></i></a>
-                    <ul aria-labelledby="navbarDropdownMenuLink2" class="dropdown-menu">
-                      <li><a href="#" class="dropdown-item">Action</a></li>
-                      <li class="dropdown-submenu"><a id="navbarDropdownMenuLink3" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item">
-                           
-                          Another action<i class="fa fa-angle-down ml-2"></i></a>
-                        <ul aria-labelledby="navbarDropdownMenuLink3" class="dropdown-menu">
-                          <li><a href="#" class="dropdown-item">Action</a></li>
-                          <li><a href="#" class="dropdown-item">Action</a></li>
-                          <li><a href="#" class="dropdown-item">Action</a></li>
-                          <li><a href="#" class="dropdown-item">Action</a></li>
-                        </ul>
-                      </li>
-                      <li><a href="#" class="dropdown-item">Something else here</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
               <!-- Multi level dropdown end-->
-              <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a>
+              <li class="nav-item"><a href="contact.html" class="nav-link">联系我们</a>
               </li>
-              <li class="nav-item dropdown"><a id="docsDropdownMenuLink" href="index.html" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link ">
-                   
-                  Docs<i class="fa fa-angle-down"></i></a>
-                <div aria-labelledby="docsDropdownMenuLink" class="dropdown-menu dropdown-menu-right">
-                  <h6 class="dropdown-header font-weight-normal">Documentation</h6><a href="docs/docs-introduction.html" class="dropdown-item">Introduction </a><a href="docs/docs-directory-structure.html" class="dropdown-item">Directory structure </a><a href="docs/docs-gulp.html" class="dropdown-item">Gulp </a><a href="docs/docs-customizing-css.html" class="dropdown-item">Customizing CSS </a><a href="docs/docs-credits.html" class="dropdown-item">Credits </a><a href="docs/docs-changelog.html" class="dropdown-item">Changelog </a>
-                  <div class="dropdown-divider"></div>
-                  <h6 class="dropdown-header font-weight-normal">Components</h6><a href="docs/components-bootstrap.html" class="dropdown-item">Bootstrap </a><a href="docs/components-sell.html" class="dropdown-item">Theme </a><a href="component-variants/header.html" class="dropdown-item">Header variants <span class="badge badge-info ml-1">New</span> </a>
-                </div>
-              </li>
+             
             </ul>
             <div class="d-flex align-items-center justify-content-between justify-content-lg-end mt-1 mb-2 my-lg-0">
               <!-- Search Button-->

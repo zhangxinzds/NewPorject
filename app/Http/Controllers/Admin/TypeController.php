@@ -200,9 +200,12 @@ class TypeController extends Controller
             $array[$a]['display'] = $dis;
             $a++;
         }
+        //添加后回到当前分类页面
         $rs = Type::insert($array);
+        $res = Type::find($request->pid);
+        $num = $res->pid; 
         if($rs){
-            return redirect('/admin/type');
+            return redirect('/admin/typechild/'.$num);
         }else{
             return back();
         }
