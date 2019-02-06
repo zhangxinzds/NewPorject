@@ -11,8 +11,8 @@
 
     <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>管理员</span></a>
         <ul class="sub-menu-list">
-            <li><a href="blank_page.html">管理员列表</a></li>
-            <li><a href="boxed_view.html">新增管理员</a></li>
+            <li><a href="/admin/manager">管理员列表</a></li>
+            <li><a href="/admin/manager/create">新增管理员</a></li>
         </ul>
     </li>
 
@@ -41,6 +41,13 @@
         <ul class="sub-menu-list">
             <li><a href="/admin/carousel">轮播列表</a></li>
             <li><a href="/admin/carousel/create">轮播添加</a></li>
+        </ul>
+    </li>
+
+    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>友链管理</span></a>
+        <ul class="sub-menu-list">
+            <li><a href="/admin/link">友链列表</a></li>
+            <li><a href="/admin/link/create">友链添加</a></li>
         </ul>
     </li>
 </ul>
@@ -240,6 +247,8 @@ $('#errormessage').delay(2000).slideUp(1000);
 
 //ajax删除原图
 $('.gpic').click(function(){
+    var cfm = confirm('确定删除?');
+    if(!cfm) return;
     var id = $(this).attr('value');
     var that = $(this);
     $.get('/admin/ajax',{id:id},function(res){

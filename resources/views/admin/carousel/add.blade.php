@@ -11,8 +11,8 @@
 
     <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>管理员</span></a>
         <ul class="sub-menu-list">
-            <li><a href="blank_page.html">管理员列表</a></li>
-            <li><a href="boxed_view.html">新增管理员</a></li>
+            <li><a href="/admin/manager">管理员列表</a></li>
+            <li><a href="/admin/manager/create">新增管理员</a></li>
         </ul>
     </li>
 
@@ -41,6 +41,13 @@
         <ul class="sub-menu-list">
             <li><a href="/admin/carousel">轮播列表</a></li>
             <li  class="active"><a href="/admin/carousel/create">轮播添加</a></li>
+        </ul>
+    </li>
+
+    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>友链管理</span></a>
+        <ul class="sub-menu-list">
+            <li><a href="/admin/link">友链列表</a></li>
+            <li><a href="/admin/link/create">友链添加</a></li>
         </ul>
     </li>
 </ul>
@@ -73,8 +80,8 @@
         position: relative;    
     }    
     .result{    
-        width: 400px;    
-        height: 200px;    
+        height:200px;
+        width: 400px;      
         text-align: center;    
         box-sizing: border-box;    
     }   
@@ -86,8 +93,8 @@
   
   
     .delete{  
+        height:200px;
         width: 400px;  
-        height:200px;  
         position: absolute;  
         text-align: center;  
         line-height: 200px;  
@@ -205,7 +212,7 @@ window.onload = function(){
                     base64 : this.result   //reader.readAsDataURL方法执行完后，base64数据储存在reader.result里    
                 }   
                 dataArr.push(imgMsg);    
-                result = '<div style="float:left" class="delete">delete</div><div class="result"><img id="img" class="subPic" style="height:200px" src="'+this.result+'" alt="'+this.fileName+'"/></div>';    
+                result = '<div style="float:left" class="delete">delete</div><div class="result"><img id="img" class="subPic" style="width:400px;height:200px"  src="'+this.result+'" alt="'+this.fileName+'"/></div>';    
                 var div = document.createElement('div');  
                 div.innerHTML = result;    
                 div['className'] = 'float';  

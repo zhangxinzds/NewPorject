@@ -8,8 +8,8 @@
 
     <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>管理员</span></a>
         <ul class="sub-menu-list">
-            <li><a href="blank_page.html">管理员列表</a></li>
-            <li><a href="boxed_view.html">新增管理员</a></li>
+            <li><a href="/admin/manager">管理员列表</a></li>
+            <li><a href="/admin/manager/create">新增管理员</a></li>
         </ul>
     </li>
 
@@ -38,6 +38,13 @@
         <ul class="sub-menu-list">
             <li><a href="/admin/carousel">轮播列表</a></li>
             <li><a href="/admin/carousel/create">轮播添加</a></li>
+        </ul>
+    </li>
+
+    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>友链管理</span></a>
+        <ul class="sub-menu-list">
+            <li><a href="/admin/link">友链列表</a></li>
+            <li><a href="/admin/link/create">友链添加</a></li>
         </ul>
     </li>
 </ul>
@@ -94,7 +101,14 @@
                             <input type="password" name="password" placeholder="" id="l-name" class="form-control">
                         </div>
                     </div>
-                        <div class="form-group has-success">
+                    <div class="form-group has-success">
+                        <label class="col-lg-1 control-label">确认密码</label>
+                        <div class="col-lg-10 input-group-lg">
+                            <input type="password" name="repassword" placeholder="" id="email2" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group has-success">
                         <label class="col-lg-1 control-label">权限</label>
                         <div class="col-lg-5">
                         <!-- <input type="" placeholder="" id="email2" class="form-control"> -->
@@ -105,13 +119,6 @@
                             </select>
                         </div>
                     </div>		
-                    <div class="form-group has-success">
-                        <label class="col-lg-1 control-label">确认密码</label>
-                        <div class="col-lg-10 input-group-lg">
-                            <input type="password" name="repassword" placeholder="" id="email2" class="form-control">
-                        </div>
-                    </div>
-
 
 
                     <div class="form-group has-success">

@@ -10,7 +10,6 @@ use Hash;
 use App\Http\Requests\Admin\UserAdd;
 use App\Http\Requests\Admin\UserEdit;
 
-
 class UserController extends Controller
 {
     /**
@@ -78,9 +77,9 @@ class UserController extends Controller
         
         //密码加密
         $rs['password'] = Hash::make($request->password);
+
         try {
             $data = User::create($rs);
-
             if($data){
                 return redirect('/admin/user');
             }
@@ -140,9 +139,9 @@ class UserController extends Controller
             $file->move('./uploads/',$name.'.'.$suffix);
 
             $rs['header'] = '/uploads/'.$name.'.'.$suffix;
-        //删除原头像
+            //删除原头像
             //默认头像不删除
-            if($header != 'man.jpg'){
+            if($header != '/common/image/man.jpg'){
                 @unlink('.'.$header);
             }
         }
@@ -177,9 +176,15 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $rs = User::where('id',$id)->delete($id);
-
+        $res = User::find($id);
+        $header = $res['header'];
+        $rs = User::where('id',$id)->delete();
         if($rs){
+            //默认头像不删除
+            if($header != '/common/image/man.jpg')
+            {
+                unlink('.'.$header);
+            }
             return redirect('/admin/user');
         }else{
             return back();

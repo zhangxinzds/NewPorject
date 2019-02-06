@@ -135,9 +135,11 @@ class TypeController extends Controller
         if($res!=''){
             return back()->with('error','删除分类中有子分类或商品');
         }else{
+            $result = Type::where('id',$id)->first();
+            $pid = $result['pid'];
             $rs = Type::where('id',$id)->delete();
             if($rs){
-                return redirect('/admin/type');
+                return redirect('/admin/typechild/'.$pid);
             }else{
                 return back();
             }

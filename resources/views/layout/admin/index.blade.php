@@ -89,8 +89,8 @@
 
                 <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>管理员</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="blank_page.html">管理员列表</a></li>
-                        <li><a href="boxed_view.html">新增管理员</a></li>
+                        <li><a href="/admin/manager">管理员列表</a></li>
+                        <li><a href="/admin/manager/create">新增管理员</a></li>
                     </ul>
                 </li>
 
@@ -119,6 +119,13 @@
                     <ul class="sub-menu-list">
                         <li><a href="/admin/carousel">轮播列表</a></li>
                         <li><a href="/admin/carousel/create">轮播添加</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>友链管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="/admin/link">友链列表</a></li>
+                        <li><a href="/admin/link/create">友链添加</a></li>
                     </ul>
                 </li>
             @show
@@ -224,113 +231,52 @@
                             </ul>
                         </div>
                     </li>
-                    <li>
-                        <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="badge">5</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-head pull-right">
-                            <h5 class="title">You have 5 Mails </h5>
-                            <ul class="dropdown-list normal-list">
-                                <li class="new">
-                                    <a href="">
-                                        <span class="thumb"><img src="/admins/images/photos/user1.png" alt="" /></span>
-                                        <span class="desc">
-                                          <span class="name">John Doe <span class="badge badge-success">new</span></span>
-                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <span class="thumb"><img src="/admins/images/photos/user2.png" alt="" /></span>
-                                        <span class="desc">
-                                          <span class="name">Jonathan Smith</span>
-                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <span class="thumb"><img src="/admins/images/photos/user3.png" alt="" /></span>
-                                        <span class="desc">
-                                          <span class="name">Jane Doe</span>
-                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <span class="thumb"><img src="/admins/images/photos/user4.png" alt="" /></span>
-                                        <span class="desc">
-                                          <span class="name">Mark Henry</span>
-                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <span class="thumb"><img src="/admins/images/photos/user5.png" alt="" /></span>
-                                        <span class="desc">
-                                          <span class="name">Jim Doe</span>
-                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="new"><a href="">Read All Mails</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="badge">4</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-head pull-right">
-                            <h5 class="title">Notifications</h5>
-                            <ul class="dropdown-list normal-list">
-                                <li class="new">
-                                    <a href="">
-                                        <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                        <span class="name">Server #1 overloaded.  </span>
-                                        <em class="small">34 mins</em>
-                                    </a>
-                                </li>
-                                <li class="new">
-                                    <a href="">
-                                        <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                        <span class="name">Server #3 overloaded.  </span>
-                                        <em class="small">1 hrs</em>
-                                    </a>
-                                </li>
-                                <li class="new">
-                                    <a href="">
-                                        <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                        <span class="name">Server #5 overloaded.  </span>
-                                        <em class="small">4 hrs</em>
-                                    </a>
-                                </li>
-                                <li class="new">
-                                    <a href="">
-                                        <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                        <span class="name">Server #31 overloaded.  </span>
-                                        <em class="small">4 hrs</em>
-                                    </a>
-                                </li>
-                                <li class="new"><a href="">See All Notifications</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <img src="/admins/images/photos/user-avatar.png" alt="" />
-                            John Doe
+
+                    @php
+                        $rs = DB::table('manager')->where('id',session('uid'))->first();
+                    @endphp
+
+                    <li class="">
+                        <a href="#" id="xiugai" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{$rs->header}}">
+                            {{$rs->name}}
                             <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                            <li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>
-                            <li><a href="#"><i class="fa fa-cog"></i>  Settings</a></li>
-                            <li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                        <ul class="dropdown-menu dropdown-menu-head pull-right">
+                        <h5 class="title">管理员修改</h5>
+                        <form action="{{route('header')}}" method="post" enctype="multipart/form-data">
+                        {{csrf_field()}}
+                         <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                        <img src="{{$rs->header}}" id="img1">
+                                    </div>
+                                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+                                    </div>
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new" id="aaa">
+                                                <i class="fa fa-paper-clip">
+                                                </i>
+                                                修改头像
+                                            </span>
+                                            <span class="fileupload-exists">
+                                                <i class="fa fa-undo">
+                                                </i>
+                                                重选
+                                            </span>
+                                            <input type="file" name="header" class="default">
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">
+                                            <i class="fa fa-trash">
+                                            </i>
+                                            移除
+                                        </a>
+                                        <button class="btn btn-success">确认修改</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <li><a href="/admin/mpassword"><i class="fa fa fa-cog"></i>修改密码</a></li>
+                            <li><a href="/admin/logout"><i class="fa fa-sign-out"></i>注销</a></li>
                         </ul>
                     </li>
 
@@ -914,6 +860,17 @@
     jQuery(document).ready(function() {
         EditableTable.init();
     });
+    var sta = 0;
+    $('#xiugai').click(function(){
+        if(sta==0){
+            $(this).parent().addClass('open');
+            $(this).attr('data-toggle','');
+            sta = 1;
+        }else{
+            $(this).parent().removeClass('open');
+            sta = 0;
+        }
+    })
 </script>
 
 @section('js')

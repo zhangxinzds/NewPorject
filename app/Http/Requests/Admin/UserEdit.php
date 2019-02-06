@@ -34,7 +34,6 @@ class UserEdit extends FormRequest
 
     public function messages()
     {
-
         return [
             'name.required' => '用户名不能为空',
             'name.regex' => '用户名格式不正确',

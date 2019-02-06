@@ -33,8 +33,20 @@
             <li><a href="/admin/goods/create">商品添加</a></li>
         </ul>
     </li>
-    <li><a href="/admin/friends"><i class="fa fa-tags"></i> <span>友情链接</span></a></li>
-    <li><a href="/admin/orders"><i class="fa fa-file-text"></i> <span>订单管理</span></a></li>
+
+    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>轮播管理</span></a>
+        <ul class="sub-menu-list">
+            <li><a href="/admin/carousel">轮播列表</a></li>
+            <li><a href="/admin/carousel/create">轮播添加</a></li>
+        </ul>
+    </li>
+    
+    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>友链管理</span></a>
+        <ul class="sub-menu-list">
+            <li><a href="/admin/link">友链列表</a></li>
+            <li><a href="/admin/link/create">友链添加</a></li>
+        </ul>
+    </li>
 </ul>
 @stop
 
