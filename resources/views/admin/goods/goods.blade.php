@@ -164,7 +164,7 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-info" href="/admin/goods/{{$v->id}}/edit">修改</a>&nbsp;
-                                    <a class="btn btn-success" href="/admin/spe/{{$v->id}}">尺寸规格</a>&nbsp;
+                                    <a class="btn btn-success" href="/admin/spe/{{$v->id}}">颜色规格</a>&nbsp;
                                     <form action="/admin/goods/{{$v->id}}" method="post" style="display:inline">
                                         {{csrf_field()}}
                                         {{method_field('DELETE')}}

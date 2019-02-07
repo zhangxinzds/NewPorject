@@ -111,7 +111,15 @@
         cursor: pointer;  
         opacity: 1;  
     }     
-	th,td{text-align:center;}
+
+	th,td{
+		text-align:center;
+	}
+
+	i{
+		font:bold 10px '宋体';
+	}
+
 </style>
  <div class="wrapper">
         <div class="row">
@@ -156,19 +164,20 @@
 	                            <th>颜色分类</th>
 	                            <th class="numeric">颜色图片</th>
 	                            <th class="numeric">状态</th>
-	                            <th class="numeric">详情</th>
+	                            <th class="numeric">库存</th>
 	                            <th class="numeric">操作</th>
 	                        </tr>
 	                        </thead>
 	                        <tbody>
 	                        @php
 								use App\Http\Model\Admin\ColorImg;
+								use App\Http\Model\Admin\Size;
 	                        @endphp
 	                        @foreach($rs as $k => $v)
 	                        <tr>
-	                            <td>{{$v['id']}}</td>
-	                            <td>{{$v['color']}}</td>
-	                            <td class="numeric col-md-4">
+	                            <td style="line-height:140px">{{$v['id']}}</td>
+	                            <td style="line-height:140px">{{$v['color']}}</td>
+	                            <td class="center-block">
 	                            	@php
 										$imgs = ColorImg::where('cid',$v['id'])->get();			
 	                            	@endphp
@@ -176,10 +185,10 @@
 										<img src="{{$val['pic']}}" style="width:100px;height:140px">
 	                            	@endforeach
 	                            </td>
-	                            <td class="numeric">
-	                            	<div class="col-lg-10 input-group" >
-                                        <div class="slide-toggle display">
-                                            <div style="position: relative;left:70px">
+	                            <td class="numerica">
+	                            	<div class="input-group" style="margin-top:50px">
+                                        <div class="slide-toggle display col-md-offset-4 col-lg-offset-4col-xl-offset-4">
+                                            <div style="position: relative;left:20px">
                                             @if($v['display']=='1')
                                                 <input type="checkbox" value="{{$v->id}}" name="{{$v->display}}"  class="js-switch" checked/>
                                             @else
@@ -189,8 +198,28 @@
                                         </div>
                                     </div>
 	                            </td>
-	                            <td class="numeric">-0.36%</td>
-	                            <td class="numeric">$1.39</td>
+	                            <td>
+	                            	<table class="col-md-offset-2" style="height:100px">
+	                            	@php
+										$size = Size::where('cid',$v['id'])->get();
+	                            	@endphp 
+	                            	@foreach($size as $ke => $va)
+	                            		<tr>
+	                            			<td style="height:25px;padding:2px"><i>型号</i>:<input style="width:80px;height:25px" type="text" value="{{$va['size']}}"></td>
+	                            			<td style="height:25px;padding:2px"><i>库存</i>:<input style="width:80px;height:25px" type="text" value="{{$va['stock']}}"></td>
+	                            			<td style="height:25px;padding:2px;"><a style="height:25px;line-height:12px" id="{{$va['id']}}" class="btn btn-info update">修改</a></td>
+	                            			<td style="height:25px;padding:2px;"><a style="height:25px;line-height:12px" id="{{$va['id']}}" class="btn btn-danger 
+	                            			remove">删除</a></td>
+	                            		</tr> 	  	
+									@endforeach
+	                            	</table>
+	                            </td>
+	                            <td class="numeric">
+    	                            	<a style="margin-top:50px" class="btn btn-success addkucun" >新增库存</a>
+    	                            	<form action="/admin/color/delete/{{$v['id']}}" method="get" style="display:inline;position:relative;left:5px;top:24px">
+                                            <button class="btn btn-warning" onclick="return confirm('确定删除?')">删除</button>
+                                        </form> 
+	                            </td>
 	                        </tr>
 	                        @endforeach
 	                        </tbody>
@@ -234,16 +263,6 @@
                            <input type="file" name="pic[]" id="file_input" multiple/>
                         </div>
                     </div>
-                    <div class="form-group has-success">
-                        <label class="col-lg-3 control-label">状态</label>
-                         <div class="col-lg-6  input-group">
-                            <div class="slide-toggle">
-                                <div style="position: relative;left:20px">
-                                    <input type="checkbox"  name="display" class="js-switch" checked/>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
                 <!-- 内容end -->
 			</div>
 			<div class="modal-footer">
@@ -258,11 +277,67 @@
 
 @section('js')
 <script>
-//显示ajax按钮
+//添加规格
+$('.addkucun').click(function(){
+	var table = $(this).parent().prev().children('table');
+	table.append('<tr><td style="height:25px;padding:2px"><i>型号</i>: <input style="width:80px;height:25px" type="text" value=""></td><td style="height:25px;padding:2px"><i>库存</i>: <input style="width:80px;height:25px" type="text" value=""></td><td style="height:25px;padding:2px;"><a style="height:25px;line-height:12px" class="btn btn-primary add">保存</a></td><td style="height:25px;padding:2px;"><a style="height:25px;line-height:12px" class="btn btn-danger remove" id="{{@$va['id']}}">删除</a></td></tr>')
+})
+//规格添加ajax
+$('.add').live('click',function(){
+	var obj = $(this).parent().parent().parent().parent().parent().parent().children();
+	var cid = $(obj[0]).html();
+	var stock = $(this).parent().prev().children('input').val();
+	var size = $(this).parent().prev().prev().children('input').val();
+	
+	var a = $(this);
+	$.get('/admin/size/addajax',{cid:cid,stock:stock,size:size},function(res){
+		if(res == 1){
+			alert('添加成功');
+			a.html('修改');
+			window.location.reload();
+			a.removeClass();
+			a.addClass('btn btn-info update');
+		}
+	})
+
+})
+
+//规格修改ajax
+$('.update').click(function(){
+	var id = $(this).attr('id');
+	var stock = $(this).parent().prev().children('input').val();
+	var size = $(this).parent().prev().prev().children('input').val();
+	
+	$.get('/admin/size/updateajax',{id:id,stock:stock,size:size},function(res){
+		if(res == 1){
+			alert('修改成功');
+		}
+	})
+})
+//规格删除ajax
+$('.remove').click(function(){
+	var tr = $(this).parent().parent();
+	var cfm = confirm('确定删除?');
+    if(!cfm) return;
+	var id = $(this).attr('id');
+	$.get('/admin/size/deleteajax',{id:id},function(res){
+		if(res == 1){
+			tr.remove();
+			alert('删除成功');
+		}
+	})
+})
+
+
+//上下架ajax按钮
 $('.display').click(function(){
     var id = $(this).find('input').val();
     var sta = $(this).find('input').attr('name');
     $.get('/admin/color/ajax',{sta:sta,id:id},function(res){
+        if(res == 1){
+            window.location.reload();
+            alert('请先添加库存');
+        }
     })
 })
 

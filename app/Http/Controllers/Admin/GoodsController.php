@@ -9,6 +9,7 @@ use App\Http\Model\Admin\GoodsImg;
 use App\Http\Model\Admin\Type;
 use App\Http\Model\Admin\Color;
 use App\Http\Model\Admin\ColorImg;
+use App\Http\Model\Admin\Size;
 use DB;
 use App\Http\Requests\Admin\GoodsAdd;
 use App\Http\Requests\Admin\GoodsEdit;
@@ -228,7 +229,7 @@ class GoodsController extends Controller
 
         return view('admin.goods.spe',['title'=>'颜色规格','gid'=>$id,'rs'=>$rs]);
     }
-
+    //新增颜色
     public function color(Request $request)
     {
         $this->validate($request, [
@@ -241,11 +242,6 @@ class GoodsController extends Controller
 
         $rs = $request->except('_token','pic');
 
-        if($request->display){
-            $rs['display'] = "1";
-        }else{
-            $rs['display'] = "0";
-        }
         //color表添加颜色
         $res = Color::create($rs);
         $id = $res['id'];
@@ -291,15 +287,77 @@ class GoodsController extends Controller
 
     }
 
-
+    //颜色上下架
     public function colorajax(Request $request)
     {
         $sta = $request->sta;
         $id = $request->id;
+        $res = Size::where('cid',$id)->first();
+
+        //没有库存无法上架
+        if(!$res){
+            echo 1;exit;
+        }
+
         if($sta == '0'){
             $rs = Color::where('id',$id)->update(['display'=> '1']);
         }else{
             $rs = Color::where('id',$id)->update(['display'=> '0']);
+        }
+    }
+    //删除颜色
+    public function colordelete($id)
+    {
+        //删除颜色
+        $rs = Color::where('id',$id)->delete();
+        $res = ColorImg::where('cid',$id)->get();
+        //删除对应的size
+        $ress = Size::where('cid',$id)->delete();
+        //删除颜色对应的图片
+        foreach($res as $k=>$v){
+            unlink('.'.$v->pic);
+        }
+
+        $result = ColorImg::where('cid',$id)->delete();
+
+        if($rs&&$ress){
+            return back();
+        }else{
+            echo 111;
+        }
+    }
+    //规格修改
+    public function sizeupdateajax(Request $request)
+    {
+        $id = $request->id;
+        $arr['size'] = $request->size;
+        $arr['stock'] = $request->stock;
+        $res = Size::where('id',$id)->update($arr);
+        if($res){
+            echo 1;
+        }
+    }
+    //规格添加
+    public function sizeaddajax(Request $request)
+    {
+        $arr['cid'] = $request->cid;
+        $arr['stock'] = $request->stock;
+        $arr['size'] = $request->size;
+        $res = Size::insert($arr);
+        if($res){
+            echo 1;
+        }
+        
+    }
+    //规格删除
+    public function sizedeleteajax(Request $request)
+    {
+        $id = $request->id;
+
+        $res = Size::where('id',$id)->delete();
+
+        if($res){
+            echo 1;
         }
     }
 }

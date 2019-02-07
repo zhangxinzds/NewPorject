@@ -62,6 +62,10 @@
 		Route::get('/admin/spe/{id}','Admin\GoodsController@spe')->name('spe');
 		Route::post('/admin/color','Admin\GoodsController@color');
 		Route::get('/admin/color/ajax','Admin\GoodsController@colorajax');
+		Route::get('/admin/color/delete/{id}','Admin\GoodsController@colordelete');
+		Route::get('/admin/size/updateajax','Admin\GoodsController@sizeupdateajax');
+		Route::get('/admin/size/addajax','Admin\GoodsController@sizeaddajax');
+		Route::get('/admin/size/deleteajax','Admin\GoodsController@sizedeleteajax');
 
 		//轮播图
 		Route::resource('/admin/carousel','Admin\CarouselController');
