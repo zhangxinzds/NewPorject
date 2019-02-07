@@ -1,8 +1,6 @@
 @extends('layout.admin.index')
 
 @section('title',$title)
-<!-- 富文本编辑器 -->
-
 
 @section('menu')
 
@@ -158,12 +156,6 @@
                         <label class="col-lg-3 control-label">价格</label>
                         <div class="col-lg-6 input-group-lg">
                             <input type="text" name="price" placeholder="" id="l-name" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group has-success">
-                        <label class="col-lg-3 control-label">库存</label>
-                        <div class="col-lg-6 input-group-lg">
-                            <input type="text" name="stock" placeholder="" id="l-name" class="form-control">
                         </div>
                     </div>
                     <div class="form-group has-success">

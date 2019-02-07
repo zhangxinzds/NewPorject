@@ -2,7 +2,7 @@ function fnFormatDetails ( oTable, nTr )
 {
     var aData = oTable.fnGetData( nTr );
     var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-    sOut += '<tr><td>内容:</td><td>'+aData[11]+'</td></tr>';
+    sOut += '<tr><td>内容:</td><td>'+aData[10]+'</td></tr>';
 
     sOut += '</table>';
 

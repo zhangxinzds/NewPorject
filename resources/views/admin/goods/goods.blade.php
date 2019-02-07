@@ -101,9 +101,6 @@
                                    厂家
                                 </th>
                                 <th class="hidden-phone">
-                                   库存
-                                </th>
-                                <th class="hidden-phone">
                                    销量
                                 </th>
                                 <th class="hidden-phone">
@@ -145,10 +142,7 @@
                                 </td>                                
                                 <td  style="line-height: 45px">
                                     {{$v->company}}
-                                </td>                                
-                                <td  style="line-height: 45px">
-                                    {{$v->stock}}
-                                </td>                                
+                                </td>                                                            
                                 <td  style="line-height: 45px">
                                     {{$v->sale}}
                                 </td>                                  
@@ -170,6 +164,7 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-info" href="/admin/goods/{{$v->id}}/edit">修改</a>&nbsp;
+                                    <a class="btn btn-success" href="/admin/spe/{{$v->id}}">尺寸规格</a>&nbsp;
                                     <form action="/admin/goods/{{$v->id}}" method="post" style="display:inline">
                                         {{csrf_field()}}
                                         {{method_field('DELETE')}}
@@ -197,7 +192,6 @@
             var id = $(this).find('input').val();
             var sta = $(this).find('input').attr('name');
             $.get('/admin/goods/status/'+sta+'/'+id,{},function(res){
-                
             })
         })
     </script>

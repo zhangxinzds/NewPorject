@@ -26,7 +26,6 @@ class GoodsAdd extends FormRequest
         return [
             'name' => 'required',
             'price' => 'required',
-            'stock' => 'required',
             'company' =>'required',
             'pic' => 'required',
             'content' => 'required',
@@ -39,7 +38,6 @@ class GoodsAdd extends FormRequest
         return [
             'name.required' => '请输入用户名',
             'price.required' => '请输入价格',
-            'stock.required' => '请输入库存',
             'company.required' => '请输入厂家',
             'pic.required' => '请添加图片',
             'content.required' => '请添加内容',        

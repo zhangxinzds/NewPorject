@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\Admin\Goods;
 use App\Http\Model\Admin\GoodsImg;
 use App\Http\Model\Admin\Type;
+use App\Http\Model\Admin\Color;
+use App\Http\Model\Admin\ColorImg;
 use DB;
 use App\Http\Requests\Admin\GoodsAdd;
 use App\Http\Requests\Admin\GoodsEdit;
@@ -197,7 +199,8 @@ class GoodsController extends Controller
     }
 
 
-    public function status($sta,$id){
+    public function status($sta,$id)
+    {
         if($sta == '0'){
             $rs = Goods::where('id',$id)->update(['status'=> '1']);
         }else{
@@ -205,7 +208,8 @@ class GoodsController extends Controller
         }
     }
 
-    public function ajax(Request $request){
+    public function ajax(Request $request)
+    {
        $id = $request->id;
        $res = GoodsImg::where('id',$id)->first();
        $rs = GoodsImg::where('id',$id)->delete();
@@ -216,5 +220,86 @@ class GoodsController extends Controller
           echo '2';
        }
 
+    }
+
+    public function spe($id)
+    {
+        $rs = Goods::find($id)->color()->get();
+
+        return view('admin.goods.spe',['title'=>'颜色规格','gid'=>$id,'rs'=>$rs]);
+    }
+
+    public function color(Request $request)
+    {
+        $this->validate($request, [
+            'color' => 'required',
+            'pic'  => 'required',
+        ],[
+            'color.required' => '请填写颜色',
+            'pic.required' => '请添加图片',
+        ]);
+
+        $rs = $request->except('_token','pic');
+
+        if($request->display){
+            $rs['display'] = "1";
+        }else{
+            $rs['display'] = "0";
+        }
+        //color表添加颜色
+        $res = Color::create($rs);
+        $id = $res['id'];
+        $coid = $res::find($id);
+
+
+        $cid = $res['id'];
+        if($request->hasFile('pic')){
+            $file = $request->file('pic');
+
+            $array = [];
+            foreach($file as $k => $v){
+                $arr = [];
+
+                $arr['cid'] = $cid;
+
+                //设置名字
+                $name = rand(1111,9999).time();
+
+                //获取后缀
+                $suffix = $v->getClientOriginalExtension();
+
+                //移动文件
+                $v->move('./uploads/colorimg', $name.'.'.$suffix);
+
+                //存储图片的路径
+                $arr['pic'] = '/uploads/colorimg/'.$name.'.'.$suffix;
+
+                $array[] = $arr;
+            }
+        }
+        //往color_img表中添加对应颜色的图片
+        $result = $coid->colorimg()->createMany($array);
+
+        if($res&&$result){
+
+            return back()->with('success','添加成功');
+
+        }else{
+
+            return back()->with('error','添加失败');
+        }
+
+    }
+
+
+    public function colorajax(Request $request)
+    {
+        $sta = $request->sta;
+        $id = $request->id;
+        if($sta == '0'){
+            $rs = Color::where('id',$id)->update(['display'=> '1']);
+        }else{
+            $rs = Color::where('id',$id)->update(['display'=> '0']);
+        }
     }
 }

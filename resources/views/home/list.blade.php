@@ -6,16 +6,12 @@
     <!-- Hero Section-->
     <section class="hero">
       <div class="container">
-        <!-- Breadcrumbs -->
-        <ol class="breadcrumb justify-content-center">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Jackets and tops</li>
-        </ol>
+        
         <!-- Hero Content-->
         <div class="hero-content pb-5 text-center">
-          <h1 class="hero-heading">Jackets and tops</h1>
+          <h2 class="hero-heading">{{$type}}</h2>
           <div class="row">   
-            <div class="col-xl-8 offset-xl-2"><p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p></div>
+            <div class="col-xl-8 offset-xl-2"><p class="lead text-muted">欢迎来到鑫鑫的购物网站</p></div>
           </div>
         </div>
       </div>
@@ -42,209 +38,35 @@
           </header>
           <div class="row">
             <!-- product-->
+            @foreach($goods as $k => $v)
             <div class="col-xl-4 col-sm-6">
               <div class="product">
                 <div class="product-image">
-                  <div class="ribbon ribbon-info">Fresh</div><img src="/homes/picture/serrah-galos-494312-unsplash.jpg" alt="product" class="img-fluid"/>
+                  <img src="{{$v['imgs'][0]['pic']}}" alt="product" style="width:255px;height:382px" class="img-fluid"/>
                   <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
                     <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
                     </div>
                   </div>
                 </div>
                 <div class="py-2">
-                  <p class="text-muted text-sm mb-1">Jackets</p>
-                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">White Tee</a></h3><span class="text-muted">$40.00</span>
+                  <p class="text-muted text-sm mb-1">{{$v['company']}}</p>
+                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">{{$v['name']}}</a></h3><span class="text-muted">${{$v['price']}}</span>
                 </div>
               </div>
             </div>
+            @endforeach
             <!-- /product-->
-            <!-- product-->
-            <div class="col-xl-4 col-sm-6">
-              <div class="product">
-                <div class="product-image"><img src="/homes/picture/kyle-loftus-590881-unsplash.jpg" alt="product" class="img-fluid"/>
-                  <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="py-2">
-                  <p class="text-muted text-sm mb-1">Denim</p>
-                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">Black blouse</a></h3><span class="text-muted">$40.00</span>
-                </div>
-              </div>
-            </div>
-            <!-- /product-->
-            <!-- product-->
-            <div class="col-xl-4 col-sm-6">
-              <div class="product">
-                <div class="product-image">
-                  <div class="ribbon ribbon-primary">Sale</div><img src="/homes/picture/kyle-loftus-596319-unsplash.jpg" alt="product" class="img-fluid"/>
-                  <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="py-2">
-                  <p class="text-muted text-sm mb-1">Accessories</p>
-                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">College jacket</a></h3><span class="text-muted">$40.00</span>
-                </div>
-              </div>
-            </div>
-            <!-- /product-->
-            <!-- product-->
-            <div class="col-xl-4 col-sm-6">
-              <div class="product">
-                <div class="product-image"><img src="/homes/picture/ethan-haddox-484912-unsplash.jpg" alt="product" class="img-fluid"/>
-                  <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="py-2">
-                  <p class="text-muted text-sm mb-1">Denim</p>
-                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">Carrot-fit jeans</a></h3><span class="text-muted">$40.00</span>
-                </div>
-              </div>
-            </div>
-            <!-- /product-->
-            <!-- product-->
-            <div class="col-xl-4 col-sm-6">
-              <div class="product">
-                <div class="product-image"><img src="/homes/picture/serrah-galos-494231-unsplash.jpg" alt="product" class="img-fluid"/>
-                  <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="py-2">
-                  <p class="text-muted text-sm mb-1">Jackets</p>
-                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">Striped T-Shirt</a></h3><span class="text-muted">$40.00</span>
-                </div>
-              </div>
-            </div>
-            <!-- /product-->
-            <!-- product-->
-            <div class="col-xl-4 col-sm-6">
-              <div class="product">
-                <div class="product-image"><img src="/homes/picture/averie-woodard-319832-unsplash.jpg" alt="product" class="img-fluid"/>
-                  <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="py-2">
-                  <p class="text-muted text-sm mb-1">Shirts</p>
-                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">Short top</a></h3><span class="text-muted">$40.00</span>
-                </div>
-              </div>
-            </div>
-            <!-- /product-->
-            <!-- product-->
-            <div class="col-xl-4 col-sm-6">
-              <div class="product">
-                <div class="product-image">
-                  <div class="ribbon ribbon-danger">Sold out</div><img src="/homes/picture/serrah-galos-494279-unsplash.jpg" alt="product" class="img-fluid"/>
-                  <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="py-2">
-                  <p class="text-muted text-sm mb-1">Sweaters</p>
-                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">Ethnic Sweater</a></h3><span class="text-muted">$40.00</span>
-                </div>
-              </div>
-            </div>
-            <!-- /product-->
-            <!-- product-->
-            <div class="col-xl-4 col-sm-6">
-              <div class="product">
-                <div class="product-image"><img src="/homes/picture/dmitriy-ilkevich-437760-unsplash.jpg" alt="product" class="img-fluid"/>
-                  <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="py-2">
-                  <p class="text-muted text-sm mb-1">Coats</p>
-                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">Beige</a></h3><span class="text-muted">$40.00</span>
-                </div>
-              </div>
-            </div>
-            <!-- /product-->
-            <!-- product-->
-            <div class="col-xl-4 col-sm-6">
-              <div class="product">
-                <div class="product-image"><img src="/homes/picture/ian-dooley-347968-unsplash.jpg" alt="product" class="img-fluid"/>
-                  <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="py-2">
-                  <p class="text-muted text-sm mb-1">T-Shirts</p>
-                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">Skull Tee</a></h3><span class="text-muted">$40.00</span>
-                </div>
-              </div>
-            </div>
-            <!-- /product-->
-            <!-- product-->
-            <div class="col-xl-4 col-sm-6">
-              <div class="product">
-                <div class="product-image"><img src="/homes/picture/alex-holyoake-571682-unsplash.jpg" alt="product" class="img-fluid"/>
-                  <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="py-2">
-                  <p class="text-muted text-sm mb-1">Denim</p>
-                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">Trucker jacket</a></h3><span class="text-muted">$40.00</span>
-                </div>
-              </div>
-            </div>
-            <!-- /product-->
-            <!-- product-->
-            <div class="col-xl-4 col-sm-6">
-              <div class="product">
-                <div class="product-image"><img src="/homes/picture/ao-456813-unsplash.jpg" alt="product" class="img-fluid"/>
-                  <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="py-2">
-                  <p class="text-muted text-sm mb-1">Denim</p>
-                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">Blouse</a></h3><span class="text-muted">$40.00</span>
-                </div>
-              </div>
-            </div>
-            <!-- /product-->
-            <!-- product-->
-            <div class="col-xl-4 col-sm-6">
-              <div class="product">
-                <div class="product-image"><img src="/homes/picture/kyle-loftus-592041-unsplash.jpg" alt="product" class="img-fluid"/>
-                  <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="py-2">
-                  <p class="text-muted text-sm mb-1">Denim</p>
-                  <h3 class="h6 text-uppercase mb-1"><a href="detail.html" class="text-dark">Shirt</a></h3><span class="text-muted">$40.00</span>
-                </div>
-              </div>
-            </div>
-            <!-- /product-->
+            
           </div>
+
           <nav aria-label="page navigation" class="d-flex justify-content-center mb-5 mt-3">
             <ul class="pagination">
               <li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">Prev</span><span class="sr-only">Previous</span></a></li>
-              <li class="page-item active"><a href="#" class="page-link">1       </a></li>
-              <li class="page-item"><a href="#" class="page-link">2       </a></li>
-              <li class="page-item"><a href="#" class="page-link">3       </a></li>
-              <li class="page-item"><a href="#" class="page-link">4       </a></li>
-              <li class="page-item"><a href="#" class="page-link">5 </a></li>
+              <li class="page-item active"><a href="#" class="page-link">1 </a></li>
+              <li class="page-item"><a href="#" class="page-link">2</a></li>
+              <li class="page-item"><a href="#" class="page-link">3</a></li>
+              <li class="page-item"><a href="#" class="page-link">4</a></li>
+              <li class="page-item"><a href="#" class="page-link">5</a></li>
               <li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">Next</span><span class="sr-only">Next     </span></a></li>
             </ul>
           </nav>
@@ -252,18 +74,19 @@
         <!-- / Grid End-->
         <!-- Sidebar-->
         <div class="sidebar col-xl-3 col-lg-4 order-lg-1">
-          <div class="sidebar-block px-3 px-lg-0 mr-lg-4"><a data-toggle="collapse" href="#categoriesMenu" aria-expanded="false" aria-controls="categoriesMenu" class="d-lg-none block-toggler">Product Categories</a>
+          <div class="sidebar-block px-3 px-lg-0 mr-lg-4">
+          <a data-toggle="collapse" href="#categoriesMenu" aria-expanded="false" aria-controls="categoriesMenu" class="d-lg-none block-toggler">Product Categories</a>
             <div id="categoriesMenu" class="expand-lg collapse">
-              <div class="nav nav-pills flex-column mt-4 mt-lg-0"> <a href="#" class="nav-link d-flex justify-content-between mb-2 "><span>Jackets</span><span class="sidebar-badge"> 120</span></a>
-                <div class="nav nav-pills flex-column ml-3"><a href="#" class="nav-link mb-2">Lorem ipsum</a><a href="#" class="nav-link mb-2">Dolor</a><a href="#" class="nav-link mb-2">Sit amet</a><a href="#" class="nav-link mb-2">Donec vitae</a>
-                </div><a href="#" class="nav-link d-flex justify-content-between mb-2 active"><span>Jeans &amp; chinos</span><span class="sidebar-badge"> 55</span></a>
-                <div class="nav nav-pills flex-column ml-3"><a href="#" class="nav-link mb-2">Lorem ipsum</a><a href="#" class="nav-link mb-2">Dolor</a><a href="#" class="nav-link mb-2">Sit amet</a><a href="#" class="nav-link mb-2">Donec vitae</a>
-                </div><a href="#" class="nav-link d-flex justify-content-between mb-2 "><span>Accessories</span><span class="sidebar-badge"> 80</span></a>
-                <div class="nav nav-pills flex-column ml-3"><a href="#" class="nav-link mb-2">Sit amet</a><a href="#" class="nav-link mb-2">Donec vitae</a><a href="#" class="nav-link mb-2">Lorem ipsum</a><a href="#" class="nav-link mb-2">Dolor</a>
-                </div>
-              </div>
+              <div class="nav nav-pills flex-column mt-4 mt-lg-0">
+              <a href="#" class="nav-link d-flex justify-content-between mb-2 "><span>{{$ptype['name']}}</span><span class="sidebar-badge"> 120</span></a>
+                <div class="nav nav-pills flex-column ml-3">
+                @foreach($types as $k => $v)
+	                <a href="/home/list/{{$v['id']}}"  @if($v['name'] == $type) class="nav-link mb-2 active"@else class="nav-link mb-2" @endif>{{$v['name']}}</a>
+	            @endforeach
+              	</div>
             </div>
           </div>
+
           <div class="sidebar-block px-3 px-lg-0 mr-lg-4"><a data-toggle="collapse" href="#priceFilterMenu" aria-expanded="false" aria-controls="priceFilterMenu" class="d-lg-none block-toggler">Filter by price</a>
             <div id="priceFilterMenu" class="expand-lg collapse">
               <h6 class="sidebar-heading d-none d-lg-block">Price  </h6>
@@ -374,7 +197,7 @@
         <!-- /Sidebar end-->
       </div>
     </div>
-    <!-- Quickview Modal    -->
+    <!--快速浏览窗口-->
     <div id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade quickview">
       <div role="document" class="modal-dialog modal-lg">
         <div class="modal-content">

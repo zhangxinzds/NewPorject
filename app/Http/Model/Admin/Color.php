@@ -4,14 +4,9 @@ namespace App\Http\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Goods extends Model
+class Color extends Model
 {
-	 /**
-     * 与模型关联的数据表
-     *
-     * @var string
-     */
-    protected $table = 'goods';
+    protected $table = 'color';
 
     protected $primarykey = 'id';
 
@@ -29,13 +24,8 @@ class Goods extends Model
 	 */
 	protected $guarded = [];
 
-    public function imgs()
+    public function colorimg()
     {
-        return $this->hasMany('App\Http\Model\Admin\GoodsImg','gid','id');
-    }
-
-    public function color()
-    {
-        return $this->hasMany('App\Http\Model\Admin\Color','gid','id');
+        return $this->hasMany('App\Http\Model\Admin\ColorImg','cid','id');
     }
 }

@@ -25,7 +25,6 @@ class GoodsEdit extends FormRequest
     {
        return [
             'name' => 'required',
-            'stock' => 'required',
             'company' =>'required',
             'price' => 'required',
             'content' => 'required',
@@ -38,7 +37,6 @@ class GoodsEdit extends FormRequest
         return [
             'name.required' => '请输入用户名',
             'price.required' => '请输入价格',
-            'stock.required' => '请输入库存',
             'company.required' => '请输入厂家',
             'content.required' => '请添加内容',        
         ];

@@ -59,6 +59,9 @@
 		Route::resource('/admin/goods','Admin\GoodsController');
 		Route::get('/admin/goods/status/{sta}/{id}','Admin\GoodsController@status');
 		Route::get('/admin/ajax','Admin\GoodsController@ajax');
+		Route::get('/admin/spe/{id}','Admin\GoodsController@spe')->name('spe');
+		Route::post('/admin/color','Admin\GoodsController@color');
+		Route::get('/admin/color/ajax','Admin\GoodsController@colorajax');
 
 		//轮播图
 		Route::resource('/admin/carousel','Admin\CarouselController');
