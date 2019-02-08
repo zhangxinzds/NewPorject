@@ -147,11 +147,6 @@ class GoodsController extends Controller
 
         $rs = $request->except('_token','_method','pic');
 
-        if($request->status){
-            $rs['status'] = "1";
-        }else{
-            $rs['status'] = "0";
-        }
         $result = Goods::where('id',$id)->update($rs);
         $info = 0;
         if($request->hasFile('pic')){
@@ -199,10 +194,16 @@ class GoodsController extends Controller
         }
     }
 
-
+    //商品上下架按钮ajax
     public function status($sta,$id)
-    {
+    {   
+
         if($sta == '0'){
+            //如果商品没有颜色和库存无法上架
+            $color = Color::where('gid',$id)->where('display',1)->get();
+            if(!count($color)){
+                echo 1;exit;
+            }
             $rs = Goods::where('id',$id)->update(['status'=> '1']);
         }else{
             $rs = Goods::where('id',$id)->update(['status'=> '0']);
@@ -287,22 +288,29 @@ class GoodsController extends Controller
 
     }
 
-    //颜色上下架
+    //颜色上下架ajax按钮
     public function colorajax(Request $request)
     {
         $sta = $request->sta;
         $id = $request->id;
         $res = Size::where('cid',$id)->first();
 
-        //没有库存无法上架
-        if(!$res){
-            echo 1;exit;
-        }
 
         if($sta == '0'){
             $rs = Color::where('id',$id)->update(['display'=> '1']);
+            //没有库存无法上架
+            if(!$res){
+                echo 1;exit;
+            }
         }else{
+            //下架所有颜色的同时下架商品
+            $rss = Color::find($id);
             $rs = Color::where('id',$id)->update(['display'=> '0']);
+            $gid = $rss['gid'];
+            $result = Color::where('gid',$gid)->where('display',1)->get();
+            if(!count($result)){
+                Goods::where('id',$gid)->update(['status'=>'0']);
+            }
         }
     }
     //删除颜色
@@ -320,10 +328,8 @@ class GoodsController extends Controller
 
         $result = ColorImg::where('cid',$id)->delete();
 
-        if($rs&&$ress){
+        if($rs&&$result){
             return back();
-        }else{
-            echo 111;
         }
     }
     //规格修改

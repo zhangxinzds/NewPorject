@@ -190,21 +190,6 @@
                     </div>
 
                     <div class="form-group has-success">
-                        <label class="col-lg-3 control-label">状态</label>
-                         <div class="col-lg-6  input-group">
-                            <div class="slide-toggle">
-                                <div style="position: relative;left:70px">
-                                    @if($goods->status == 1)
-                                    <input type="checkbox"  name="status" class="js-switch" checked/>
-                                    @else
-                                    <input type="checkbox"  name="status" class="js-switch"/>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-
-                    <div class="form-group has-success">
                         <label class="col-lg-3 control-label">内容</label>
                         <div class="col-lg-6 input-group-lg">
                             <script id="editor" name='content' type="text/plain" style="width:800px;height:450px;">{!!$goods->content!!}</script>

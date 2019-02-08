@@ -24,7 +24,10 @@
 	Route::get('/home/logout','Home\LoginController@logout')->name('logout');
 	//前台列表页
 	Route::get('/home/list/{id}','Home\ListController@index');
-
+	//前台详情页
+	Route::get('/home/details/{id}','Home\DetailsController@index');
+	Route::get('/home/detail/colorimgajax','Home\DetailsController@colorimgajax');
+	Route::get('/home/detail/sizeajax','Home\DetailsController@sizeajax');
 
 	//后台登录
 	Route::get('/admin/login','Admin\LoginController@login');

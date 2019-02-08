@@ -36,15 +36,15 @@
               </select>
             </div>
           </header>
-          <div class="row">
             <!-- product-->
+          <div class="row">
             @foreach($goods as $k => $v)
             <div class="col-xl-4 col-sm-6">
               <div class="product">
                 <div class="product-image">
                   <img src="{{$v['imgs'][0]['pic']}}" alt="product" style="width:255px;height:382px" class="img-fluid"/>
                   <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="detail.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right"><i class="fa fa-expand-arrows-alt"></i></a>
+                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="/home/details/{{$v['id']}}" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a id="{{$v['id']}}" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right kuaisu"><i class="fa fa-expand-arrows-alt"></i></a>
                     </div>
                   </div>
                 </div>
@@ -55,20 +55,12 @@
               </div>
             </div>
             @endforeach
-            <!-- /product-->
-            
           </div>
+            <!-- /product-->
 
-          <nav aria-label="page navigation" class="d-flex justify-content-center mb-5 mt-3">
-            <ul class="pagination">
-              <li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">Prev</span><span class="sr-only">Previous</span></a></li>
-              <li class="page-item active"><a href="#" class="page-link">1 </a></li>
-              <li class="page-item"><a href="#" class="page-link">2</a></li>
-              <li class="page-item"><a href="#" class="page-link">3</a></li>
-              <li class="page-item"><a href="#" class="page-link">4</a></li>
-              <li class="page-item"><a href="#" class="page-link">5</a></li>
-              <li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">Next</span><span class="sr-only">Next     </span></a></li>
-            </ul>
+
+          <nav aria-label="page navigation" class="d-flex justify-content-center mb-5 mt-3">       
+            {{$goods->links('common.pagination')}}
           </nav>
         </div>
         <!-- / Grid End-->
@@ -211,11 +203,11 @@
             <div class="row">
               <div class="col-lg-6">
                 <div data-slider-id="1" class="owl-carousel owl-theme owl-dots-modern detail-full">
-                  <div style="background: center center url('static/images/kyle-loftus-596319-detail-1.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
-                  <div style="background: center center url('static/images/kyle-loftus-596319-detail-2.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
-                  <div style="background: center center url('static/images/kyle-loftus-596319-detail-3.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
-                  <div style="background: center center url('static/images/kyle-loftus-594535-unsplash-detail-3.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
-                  <div style="background: center center url('static/images/kyle-loftus-594535-unsplash-detail-4.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
+                  <div style="background: center center url('/homes/images/kyle-loftus-596319-detail-1.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
+                  <div style="background: center center url('/homes/images/kyle-loftus-596319-detail-2.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
+                  <div style="background: center center url('/homes/images/kyle-loftus-596319-detail-3.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
+                  <div style="background: center center url('/homes/images/kyle-loftus-594535-unsplash-detail-3.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
+                  <div style="background: center center url('/homes/images/kyle-loftus-594535-unsplash-detail-4.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
                 </div>
               </div>
               <div class="col-lg-6 d-flex align-items-center">
@@ -315,7 +307,10 @@
 
 @stop
 @section('js')
+
+
 <script>
+
       var snapSlider = document.getElementById('slider-snap');
       
       noUiSlider.create(snapSlider, {

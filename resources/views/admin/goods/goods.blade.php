@@ -192,6 +192,10 @@
             var id = $(this).find('input').val();
             var sta = $(this).find('input').attr('name');
             $.get('/admin/goods/status/'+sta+'/'+id,{},function(res){
+                if(res == 1){
+                    alert('请先添加规格颜色和库存');
+                    location.reload();
+                }
             })
         })
     </script>
