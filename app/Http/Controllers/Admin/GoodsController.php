@@ -297,11 +297,11 @@ class GoodsController extends Controller
 
 
         if($sta == '0'){
-            $rs = Color::where('id',$id)->update(['display'=> '1']);
-            //没有库存无法上架
             if(!$res){
                 echo 1;exit;
             }
+            //没有库存无法上架
+            $rs = Color::where('id',$id)->update(['display'=> '1']);
         }else{
             //下架所有颜色的同时下架商品
             $rss = Color::find($id);
@@ -357,10 +357,33 @@ class GoodsController extends Controller
     }
     //规格删除
     public function sizedeleteajax(Request $request)
-    {
+    {   
         $id = $request->id;
 
+        $result = Size::where('id',$id)->first();
+
+        $cid = $result['cid'];
+
         $res = Size::where('id',$id)->delete();
+        
+        $rs = Size::where('cid',$cid)->get();
+        
+        //删除所有规格后该颜色自动下架
+        if(!count($rs)){
+
+            Color::where('id',$cid)->update(['display'=>'0']);
+            //判断是否还有颜色上架,没有自动下架该商品
+            $color = Color::where('id',$cid)->first();
+            $gid = $color['gid'];
+            $result = Color::where('gid',$gid)->where('display','1')->get();
+            if(!count($result)){
+                Goods::where('id',$gid)->update(['status'=>'0']);
+            }
+            if($res){
+                echo 2;exit;
+            }
+
+        }
 
         if($res){
             echo 1;

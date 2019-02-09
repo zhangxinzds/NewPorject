@@ -43,8 +43,8 @@
               <div class="product">
                 <div class="product-image">
                   <img src="{{$v['imgs'][0]['pic']}}" alt="product" style="width:255px;height:382px" class="img-fluid"/>
-                  <div class="product-hover-overlay"><a href="detail.html" class="product-hover-overlay-link"></a>
-                    <div class="product-hover-overlay-buttons"><a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="/home/details/{{$v['id']}}" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a id="{{$v['id']}}" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right kuaisu"><i class="fa fa-expand-arrows-alt"></i></a>
+                  <div class="product-hover-overlay"><a class="product-hover-overlay-link"></a>
+                    <div class="product-hover-overlay-buttons"><a class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a><a href="/home/details/{{$v['id']}}" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">View</span></a><a id="{{$v['id']}}" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark btn-product-right kuaisu"><i class="fa fa-expand-arrows-alt"></i></a>
                     </div>
                   </div>
                 </div>

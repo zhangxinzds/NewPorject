@@ -28,6 +28,10 @@
 	Route::get('/home/details/{id}','Home\DetailsController@index');
 	Route::get('/home/detail/colorimgajax','Home\DetailsController@colorimgajax');
 	Route::get('/home/detail/sizeajax','Home\DetailsController@sizeajax');
+	//前台购物车
+	Route::get('/home/cart','Home\CartController@index')->name('cart');
+	Route::post('/home/cart/addcart','Home\CartController@addcart');
+
 
 	//后台登录
 	Route::get('/admin/login','Admin\LoginController@login');

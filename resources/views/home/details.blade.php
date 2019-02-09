@@ -6,6 +6,7 @@
 
 <section class="product-details">
       <div class="container">
+
         <div class="row">
           <div class="col-lg-7 pt-4 order-2 order-lg-1">
             <div class="row">   
@@ -41,10 +42,7 @@
             <h1 class="mb-4">Modern Jacket</h1>
             <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-sm-between mb-4">
               <ul class="list-inline mb-2 mb-sm-0">
-                <li class="list-inline-item h4 font-weight-light mb-0">$65.00</li>
-                <li class="list-inline-item text-muted font-weight-light"> 
-                  <del>$90.00</del>
-                </li>
+                <li class="list-inline-item h4 font-weight-light mb-0">${{$goods['price']}}</li>
               </ul>
               <div class="d-flex align-items-center">
                 <ul class="list-inline mr-2 mb-0">
@@ -57,9 +55,20 @@
               </div>
             </div>
             <p class="mb-4 text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
-            <form action="#">
+			@if (count($errors) > 0)
+			    <div class="alert alert-danger" id="errormessage">
+			        <ul>
+			            @foreach ($errors->all() as $error)
+			                <li>{{ $error }}</li>
+			            @endforeach
+			        </ul>
+			    </div>
+			 @endif
+            <form action="/home/cart/addcart" method="post">
+            {{csrf_field()}}
+            	<input type="text" name="price" value="{{$goods['price']}}" hidden>
+            	<input type="text" name="name"  value="{{$goods['name']}}" hidden>
               <div class="row">
-
 				<!-- 颜色 -->
                 <div class="col-12 detail-option mb-3">
                   <h6 class="detail-option-heading">颜色<span>(必填)</span></h6>
@@ -67,7 +76,7 @@
                   @foreach($color as $k => $v)
                     <li class="list-inline-item">
                       <label for="colour_{{$v['color']}}" style="background-color:{{$v['color']}}" class="btn-colour"> </label>
-                      <input type="radio" name="colour" value="{{$v['id']}}" id="colour_{{$v['color']}}" required class="input-invisible  xzc">
+                      <input type="radio" name="cid" value="{{$v['id']}}" required id="colour_{{$v['color']}}" class="input-invisible xzc">
                     </li>
                   @endforeach
                   </ul>
@@ -75,30 +84,19 @@
                 <!-- 颜色end -->
 
               	<!-- 尺寸 -->
-                <div class="col-sm-6 col-lg-12 detail-option mb-3">
-                  <h6 class="detail-option-heading">尺寸<span>(必填)</span></h6>
-                  <label for="size_0" class="btn btn-sm btn-outline-secondary detail-option-btn-label">
-                     
-                    Small
-                    <input type="radio" name="size" value="value_0" id="size_0" required class="input-invisible">
-                  </label>
-                  <label for="size_1" class="btn btn-sm btn-outline-secondary detail-option-btn-label">
-                     
-                    Medium
-                    <input type="radio" name="size" value="value_1" id="size_1" required class="input-invisible">
-                  </label>
-                  <label for="size_2" class="btn btn-sm btn-outline-secondary detail-option-btn-label">
-                     
-                    Large
-                    <input type="radio" name="size" value="value_2" id="size_2" required class="input-invisible">
-                  </label>
+                <div class="col-sm-6 col-lg-12 detail-option mb-3 chicun">
+                 <h6 class="detail-option-heading">尺寸<span>(必填)</span></h6>
+                 <label><h6 class="detail-option-heading"><span>请先选择颜色</span></h6></label>
                 </div>
                 <!-- 尺寸end -->
 
                 <!-- 数量 -->
                 <div class="col-12 detail-option mb-5">
                   <label class="detail-option-heading font-weight-bold">数量<span>(必填)</span></label>
-                  <input name="items" type="number" value="1" class="form-control detail-quantity">
+                 <span class="btn btn-outline-secondary btn-md plus" style="position:relative;left:54px;top:41px">＋</span>
+                  <input name="num" type="text" value="1" class="form-control detail-quantity num" style="margin-left:45px">
+                 <span class="btn btn-outline-secondary btn-md min" style="position:relative;left:0px;top:-41px">－</span>
+                  <h7 class="stock" style="margin-left:-43px"></h7>
                 </div>
                 <!-- 数量end -->
 
@@ -107,7 +105,7 @@
                 <li class="list-inline-item">
                   <button type="submit" class="btn btn-dark btn-lg mb-1"> <i class="fa fa-shopping-cart mr-2"></i>添加至购物车</button>
                 </li>
-                <li class="list-inline-item"><a href="#" class="btn btn-outline-secondary mb-1"> <i class="far fa-heart mr-2"></i>添加到愿望清单</a></li>
+                <li class="list-inline-item"><a class="btn btn-outline-secondary mb-1"> <i class="far fa-heart mr-2"></i>加入收藏</a></li>
               </ul>
             </form>
           </div>
@@ -475,11 +473,58 @@
         </div>
       </div>
     </div>
-
 @stop
 
 @section('js')
 <script>
+	//错误提示消息
+	$('#errormessage').delay(2000).slideUp(1000);
+
+	//购买数量加
+	$('.plus').click(function(){
+		var num = $('.num').val();
+		var stock = $(this).parent().children('h7').attr('stock');
+		num++;
+		if(num >= stock){
+			$('.num').val(stock);
+		}else{
+			$('.num').val(num);
+		}
+	})
+	//购买数量减
+	$('.min').click(function(){
+		var num = $('.num').val();
+		num--;
+		if(num < 1){
+			$('.num').val(1);
+		}else{
+			$('.num').val(num);
+		}
+	})
+	//输入数量判断
+	$(".num").bind("input propertychange",function(){
+    	var stock = $(this).parent().children('h7').attr('stock');
+    	var now = $(this).val();
+    	var num = now - stock;
+    	//正则验证
+    	var reg = /^[0-9]*$/;
+    	if(reg.test(now)){
+	    	//数量超过库存
+	    	if(num>=0){
+	    		$('.num').val(stock);
+	    	}
+    	}else{
+    		$('.num').val(1);
+    	}
+	})
+	//数量失去焦点时不能为0
+	$(".num").blur(function(){
+       	var now = $(this).val();
+	   	if(now==0){
+	    	$('.num').val(1);
+    	}
+	})
+
 	//大图的对象集合
 	var imgs = $('.aaa').children().find('img');
 
@@ -501,11 +546,32 @@
 	//查询size表中的信息
 	$('.xzc').click(function(){
 		var cid = $(this).val();
+		$('.stock').empty();
 		$.get('/home/detail/sizeajax',{cid:cid},function(res){
-			console.log(res);
-
+			$('.chicun').children('label').remove();
+			//size表中的信息
+			sss = res;
+			for(var i = 0;i<res.length;i++){
+				$('.chicun').append('<label for="size_'+i+'" class="btn btn-sm btn-outline-secondary detail-option-btn-label">'+res[i].size+'<input type="radio" name="sid" value="'+res[i].id+'" id="size_'+i+'" num="'+i+'" class="input-invisible bbb" required></label>');
+			}
 		},'json');
 	})
+
+	//尺寸选中效果
+	$(document).on('click','.bbb',function(){
+		$(this).parent().parent().children('label').removeClass('active');
+		$(this).parent().addClass('active');
+		//显示对应尺寸的库存
+		var num = $(this).attr('num');
+		$('.stock').empty();
+		//库存显示
+		$('.stock').append('库存:'+sss[num].stock);
+		//辅助
+		$('.stock').attr('stock',sss[num].stock);
+		$('.num').val(1);
+	})
+
+
 </script>
 
 @stop

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Admin\Color;
+use App\Http\Model\Admin\Goods;
 use App\Http\Model\Admin\ColorImg;
 use App\Http\Model\Admin\Size;
 
@@ -13,6 +14,7 @@ class DetailsController extends Controller
 {
     public function index($id)
     {
+    	$goods = Goods::find($id);
     	$color = Color::where('gid',$id)->where('display',1)->get();
     	//如何商品没有添加颜色规格
     	if(!count($color)){
@@ -35,7 +37,7 @@ class DetailsController extends Controller
     	}
     	$cid = $color[0]['id'];
     	$colorimg = ColorImg::where('cid',$cid)->get();
-    	return view('home.details',['title'=>'商品详情页','color'=>$color,'colorimg'=>$colorimg]);
+    	return view('home.details',['title'=>'商品详情页','color'=>$color,'colorimg'=>$colorimg,'goods'=>$goods]);
     }
 
     public function colorimgajax(Request $request)

@@ -324,7 +324,10 @@ $('.remove').click(function(){
 		if(res == 1){
 			tr.remove();
 			alert('删除成功');
-		}
+		}else if(res == 2){
+            alert('删除成功');
+            location.reload();
+        }
 	})
 })
 

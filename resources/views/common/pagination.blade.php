@@ -1,4 +1,3 @@
-
 @if ($paginator->hasPages())
 @php
 //指定显示的页码数量，取值范围3-n

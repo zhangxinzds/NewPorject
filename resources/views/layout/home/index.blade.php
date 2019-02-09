@@ -207,38 +207,41 @@
                     <svg class="svg-icon">
                       <use xlink:href="#cart-1"> </use>
                     </svg>
-                    <div class="navbar-icon-link-badge">3                         </div></a>
+                    <div class="navbar-icon-link-badge">{{count(session('cart'))}}</div></a>
+                  
                   <div aria-labelledby="cartdetails" class="dropdown-menu dropdown-menu-right p-4">
                     <div class="navbar-cart-product-wrapper">
                       <!-- cart item-->
-                      <div class="navbar-cart-product"> 
-                        <div class="d-flex align-items-center"><a href="detail.html"><img src="/homes/picture/product-square-ian-dooley-347968-unsplash.jpg" alt="..." class="img-fluid navbar-cart-product-image"></a>
-                          <div class="w-100"><a href="#" class="close text-sm mr-2"><i class="fa fa-times">                                                   </i></a>
-                            <div class="pl-3"> <a href="detail.html" class="navbar-cart-product-link">Skull Tee</a><small class="d-block text-muted">Quantity: 1 </small><strong class="d-block text-sm">$75.00 </strong></div>
+                      @php
+                        use App\Http\Model\Admin\ColorImg;
+                        use App\Http\Model\Admin\Color;
+                        $total = 0;
+                      @endphp
+                      @if(session('cart'))
+                        @foreach(session('cart') as $k => $v)
+                        @php  
+                          $img = ColorImg::where('cid',$v['cid'])->first();
+                          $color = Color::where('id',$v['cid'])->first();
+                          $gid = $color['gid'];
+                        @endphp
+                        <div class="navbar-cart-product"> 
+                          <div class="d-flex align-items-center"><a href="/home/details/{{$gid}}"><img src="{{$img['pic']}}" class="img-fluid navbar-cart-product-image"></a>
+                            <div class="w-100"><a href="#" class="close text-sm mr-2"><i class="fa fa-times"></i></a>
+                              <div class="pl-3"> <a href="/home/details/{{$gid}}" class="navbar-cart-product-link">{{$v['name']}}</a><small class="d-block text-muted">数量:{{$v['num']}}</small><strong class="d-block text-sm">${{$v['price']}}</strong></div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <!-- cart item-->
-                      <div class="navbar-cart-product"> 
-                        <div class="d-flex align-items-center"><a href="detail.html"><img src="/homes/picture/product-square-kyle-loftus-596319-unsplash.jpg" alt="..." class="img-fluid navbar-cart-product-image"></a>
-                          <div class="w-100"><a href="#" class="close text-sm mr-2"><i class="fa fa-times">                                                   </i></a>
-                            <div class="pl-3"> <a href="detail.html" class="navbar-cart-product-link">Transparent Blouse</a><small class="d-block text-muted">Quantity: 1 </small><strong class="d-block text-sm">$75.00 </strong></div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- cart item-->
-                      <div class="navbar-cart-product"> 
-                        <div class="d-flex align-items-center"><a href="detail.html"><img src="/homes/picture/product-square-serrah-galos-494312-unsplash.jpg" alt="..." class="img-fluid navbar-cart-product-image"></a>
-                          <div class="w-100"><a href="#" class="close text-sm mr-2"><i class="fa fa-times">                                                   </i></a>
-                            <div class="pl-3"> <a href="detail.html" class="navbar-cart-product-link">White Tee</a><small class="d-block text-muted">Quantity: 1 </small><strong class="d-block text-sm">$75.00 </strong></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                        @php
+                            $total += $v['num']*$v['price'];
+                        @endphp
+                        @endforeach
+                        <div class="navbar-cart-total"><span class="text-uppercase text-muted">总价</span><strong class="text-uppercase">${{$total}}</strong></div>
+                      @else
+                        <div class="navbar-cart-total"><strong class="text-uppercase">暂无商品</strong></div>
+                      @endif
                     <!-- total price-->
-                    <div class="navbar-cart-total"><span class="text-uppercase text-muted">Total</span><strong class="text-uppercase">$75.00</strong></div>
                     <!-- buttons-->
-                    <div class="d-flex justify-content-between"><a href="cart.html" class="btn btn-link text-dark mr-3">View Cart <i class="fa-arrow-right fa"></i></a><a href="checkout1.html" class="btn btn-outline-dark">Checkout</a></div>
+                    <div class="d-flex justify-content-between"><a class="btn btn-link text-dark mr-3">购物车<i class="fa-arrow-right fa"></i></a><a href="{{route('cart')}}" class="btn btn-outline-dark">查看购物车</a></div>
                   </div>
                 </div>
               </div>
