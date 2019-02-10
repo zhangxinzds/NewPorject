@@ -4,9 +4,9 @@ namespace App\Http\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Orders extends Model
+class Cart extends Model
 {
-    protected $table = 'orders';
+    protected $table = 'cart';
 
     protected $primarykey = 'id';
 
@@ -23,9 +23,4 @@ class Orders extends Model
 	 * @var array
 	 */
 	protected $guarded = [];
-
-	public function info()
-    {
-        return $this->hasMany('App\Http\Model\Admin\OrderInfo','oid','id');
-    }
 }

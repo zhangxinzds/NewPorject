@@ -29,9 +29,20 @@
 	Route::get('/home/detail/colorimgajax','Home\DetailsController@colorimgajax');
 	Route::get('/home/detail/sizeajax','Home\DetailsController@sizeajax');
 	//前台购物车
-	Route::get('/home/cart','Home\CartController@index')->name('cart');
 	Route::post('/home/cart/addcart','Home\CartController@addcart');
+	
+	Route::group(['middleware'=>['homelogin']],function(){
 
+		Route::get('/home/cart','Home\CartController@index')->name('cart');
+		Route::get('/home/cart/delete','Home\CartController@delete');
+		Route::get('/home/checkout','Home\CheckoutController@index');
+		Route::get('/home/checkout1/{id}','Home\CheckoutController@checkout1');
+		Route::get('/home/checkout2/{id}','Home\CheckoutController@checkout2');
+		Route::get('/home/checkout3/{id}','Home\CheckoutController@checkout3');
+		Route::get('/home/checkout4/{id}','Home\CheckoutController@checkout4');
+		Route::get('/home/checkout5/{id}','Home\CheckoutController@checkout5');
+
+	});
 
 	//后台登录
 	Route::get('/admin/login','Admin\LoginController@login');

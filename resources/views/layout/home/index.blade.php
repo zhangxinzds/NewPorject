@@ -77,6 +77,12 @@
 
               @php
                 use App\Http\Model\Admin\Type;
+                use App\Http\Model\Admin\Cart;
+                use App\Http\Model\Admin\ColorImg;
+                use App\Http\Model\Admin\Color;
+                use App\Http\Model\Admin\User;
+                use App\Http\Model\Admin\Orders;
+                $total = 0;
                 $type = Type::where('pid',0)->get();
               @endphp
 
@@ -207,41 +213,84 @@
                     <svg class="svg-icon">
                       <use xlink:href="#cart-1"> </use>
                     </svg>
+                    <!-- 登录 -->
+                    @if(session('id'))
+                    @php
+                        $cart = DB::table('cart')->where('uid',session('id'))->count();
+                        $carts = Cart::where('uid',session('id'))->get(); 
+                    @endphp
+                    <div class="navbar-icon-link-badge">{{$cart}}</div></a>
+                    @else
+                    <!-- 未登录 -->
                     <div class="navbar-icon-link-badge">{{count(session('cart'))}}</div></a>
-                  
+                    @endif
                   <div aria-labelledby="cartdetails" class="dropdown-menu dropdown-menu-right p-4">
                     <div class="navbar-cart-product-wrapper">
                       <!-- cart item-->
-                      @php
-                        use App\Http\Model\Admin\ColorImg;
-                        use App\Http\Model\Admin\Color;
-                        $total = 0;
-                      @endphp
-                      @if(session('cart'))
-                        @foreach(session('cart') as $k => $v)
-                        @php  
-                          $img = ColorImg::where('cid',$v['cid'])->first();
-                          $color = Color::where('id',$v['cid'])->first();
-                          $gid = $color['gid'];
-                        @endphp
-                        <div class="navbar-cart-product"> 
-                          <div class="d-flex align-items-center"><a href="/home/details/{{$gid}}"><img src="{{$img['pic']}}" class="img-fluid navbar-cart-product-image"></a>
-                            <div class="w-100"><a href="#" class="close text-sm mr-2"><i class="fa fa-times"></i></a>
-                              <div class="pl-3"> <a href="/home/details/{{$gid}}" class="navbar-cart-product-link">{{$v['name']}}</a><small class="d-block text-muted">数量:{{$v['num']}}</small><strong class="d-block text-sm">${{$v['price']}}</strong></div>
+                      <!-- 登录 -->
+                      @if(session('id'))
+                              @if($carts)
+                                @foreach($carts as $k => $v)
+                                @php  
+                                  $img = ColorImg::where('cid',$v['cid'])->first();
+                                  $color = Color::where('id',$v['cid'])->first();
+                                  $gid = $color['gid'];
+                                @endphp
+                                <div class="navbar-cart-product"> 
+                                  <div class="d-flex align-items-center"><a href="/home/details/{{$gid}}"><img src="{{$img['pic']}}" class="img-fluid navbar-cart-product-image"></a>
+                                    <div class="w-100"><a href="#" class="close text-sm mr-2"><i class="fa fa-times"></i></a>
+                                      <div class="pl-3"> <a href="/home/details/{{$gid}}" class="navbar-cart-product-link">{{$v['name']}}</a><small class="d-block text-muted">数量:{{$v['num']}}</small><strong class="d-block text-sm">${{$v['price']}}</strong></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                @php
+                                    $total += $v['num']*$v['price'];
+                                @endphp
+                                @endforeach
+                                <div class="navbar-cart-total"><span class="text-uppercase text-muted">总价</span><strong class="text-uppercase">${{$total}}</strong></div>
+                            @else
+                                <div class="navbar-cart-total"><strong class="text-uppercase">暂无商品</strong></div>
+                            @endif
+                      @else
+                        <!-- 未登录 -->
+                        @if(session('cart'))
+                          @foreach(session('cart') as $k => $v)
+                          @php  
+                            $img = ColorImg::where('cid',$v['cid'])->first();
+                            $color = Color::where('id',$v['cid'])->first();
+                            $gid = $color['gid'];
+                          @endphp
+                          <div class="navbar-cart-product"> 
+                            <div class="d-flex align-items-center"><a href="/home/details/{{$gid}}"><img src="{{$img['pic']}}" class="img-fluid navbar-cart-product-image"></a>
+                              <div class="w-100"><a href="#" class="close text-sm mr-2"><i class="fa fa-times"></i></a>
+                                <div class="pl-3"> <a href="/home/details/{{$gid}}" class="navbar-cart-product-link">{{$v['name']}}</a><small class="d-block text-muted">数量:{{$v['num']}}</small><strong class="d-block text-sm">${{$v['price']}}</strong></div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        @php
-                            $total += $v['num']*$v['price'];
-                        @endphp
-                        @endforeach
-                        <div class="navbar-cart-total"><span class="text-uppercase text-muted">总价</span><strong class="text-uppercase">${{$total}}</strong></div>
-                      @else
-                        <div class="navbar-cart-total"><strong class="text-uppercase">暂无商品</strong></div>
+                          @php
+                              $total += $v['num']*$v['price'];
+                          @endphp
+                          @endforeach
+                          <div class="navbar-cart-total"><span class="text-uppercase text-muted">总价</span><strong class="text-uppercase">${{$total}}</strong></div>
+                        @else
+                          <div class="navbar-cart-total"><strong class="text-uppercase">暂无商品</strong></div>
+                        @endif
+
                       @endif
                     <!-- total price-->
                     <!-- buttons-->
-                    <div class="d-flex justify-content-between"><a class="btn btn-link text-dark mr-3">购物车<i class="fa-arrow-right fa"></i></a><a href="{{route('cart')}}" class="btn btn-outline-dark">查看购物车</a></div>
+                    <div class="d-flex justify-content-between"><a href="{{route('cart')}}" class="btn btn-outline-dark">查看购物车</a></div>
+                    @if(session('id'))
+                      @php
+                        $user = User::where('id',session('id'))->first();
+                        $name = $user['name'];
+                        $order = Orders::where('uname',$name)->where('status',0)->get();
+                      @endphp
+                      @if(count($order))
+                         <div class="d-flex justify-content-between"><a href="/home/checkout1" class="btn btn-outline-dark">有未支付订单!前往支付</a></div>         
+                      @endif
+                    @endif
+
                   </div>
                 </div>
               </div>
@@ -341,11 +390,11 @@
             <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
               <h6 class="text-uppercase text-dark mb-3">Company</h6>
               <ul class="list-unstyled">
-                <li> <a href="#" class="text-muted">Login                    </a></li>
-                <li> <a href="#" class="text-muted">Register                    </a></li>
-                <li> <a href="#" class="text-muted">Wishlist                    </a></li>
-                <li> <a href="#" class="text-muted">Our Products                    </a></li>
-                <li> <a href="#" class="text-muted">Checkouts                    </a></li>
+                <li> <a href="#" class="text-muted">Login</a></li>
+                <li> <a href="#" class="text-muted">Register</a></li>
+                <li> <a href="#" class="text-muted">Wishlist</a></li>
+                <li> <a href="#" class="text-muted">Our Products</a></li>
+                <li> <a href="#" class="text-muted">Checkouts</a></li>
               </ul>
             </div>
             <div class="col-lg-4">

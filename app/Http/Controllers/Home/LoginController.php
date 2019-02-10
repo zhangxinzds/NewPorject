@@ -8,6 +8,7 @@ use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder; 
 use App\Http\Model\Admin\User;
 use App\Http\Model\Admin\UserInfo;
+use App\Http\Model\Admin\Cart;
 use Hash;
 class LoginController extends Controller
 {
@@ -45,7 +46,7 @@ class LoginController extends Controller
     	//1.检测用户名
     	//邮箱
     	$res = UserInfo::where('email',$request->email)->first();
-    	$id = $res['id'];
+    	$id = $res['uid'];
     	$result = User::find($id);
     	//用户名
 		$rs = User::where('name',$request->email)->first();
@@ -60,15 +61,13 @@ class LoginController extends Controller
 			//邮箱
 			if (!Hash::check($request->password,$result['password'])) {
 
-				return back()->with('errorss','用户名或密码错误');
-
+			return back()->with('errorss','用户名或密码错误');
 			}
 		}else{
 			//用户名
 			if (!Hash::check($request->password,$rs['password'])) {
 
 			return back()->with('errorss','用户名或密码错误');
-
 			}
 		}
 		//3.检测验证码
@@ -78,18 +77,45 @@ class LoginController extends Controller
 
 		}
 		if($res){
+            //邮箱登录
 			session(['id'=>$id]);
 		}else{
+            //用户名登录
 			session(['id'=>$rs['id']]);
 		}
 
-		return redirect('/')->with('success','登录成功');
+        //如果购物车有商品,要加入cart表
+        if(session('cart')){
+            foreach(session('cart') as $va){
+                $va['uid'] = session('id');
+                $arr[] = $va;
+            }
+            Cart::insert($arr);
+            \Session::forget('cart');
+        }
 
+        //登录后如果cart表中有未支付的商品要存入session('cart'),方便前台显示
+        $cart = Cart::where('uid',session('id'))->get();
+        if($cart){
+            foreach($cart as $k=>$v){
+                $arr['uid'] = $v['uid'];
+                $arr['cid'] = $v['cid'];
+                $arr['sid'] = $v['sid'];
+                $arr['name'] = $v['name'];
+                $arr['price'] = $v['price'];
+                $arr['num'] = $v['num'];
+                \Session::push('cart',$arr);
+            }
+        }
+
+		return redirect('/')->with('success','登录成功');
     }
 
     public function logout()
     {
     	session(['id'=>'']);
+
+        \Session::forget('cart');
 
     	return redirect('/');
     }

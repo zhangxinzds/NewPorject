@@ -64,6 +64,11 @@
 			        </ul>
 			    </div>
 			 @endif
+       @if (session('success'))
+        <div class="alert alert-success" id="errormessage">
+            {{ session('success') }}
+        </div>
+      @endif
             <form action="/home/cart/addcart" method="post">
             {{csrf_field()}}
             	<input type="text" name="price" value="{{$goods['price']}}" hidden>
