@@ -43,8 +43,8 @@
                   </div>
                 </div>
               </div>
-              <div class="cart-body">
               <form action="/home/checkout" method="get">
+              <div class="cart-body">
                 <!-- Product-->
                 @foreach($cart as $k => $v)
                 @php
@@ -100,8 +100,8 @@
                   $sum += $total;
                 @endphp
               @endforeach
-                                <input type="text" value="{{$sum}}" class="sum" name="total" style="display:none">
               </div>
+                <input type="text" value="{{$sum}}" class="sum" name="total" style="display:none">
             </div>
             <div class="my-5 d-flex justify-content-between flex-column flex-lg-row"><a href="category.html" class="btn btn-link text-muted"><i class="fa fa-chevron-left"></i>继续购物</a><a><button class="btn btn-dark">去结算</button><i class="fa fa-chevron-right"></i></a></div>
                       </form>

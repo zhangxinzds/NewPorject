@@ -25,7 +25,7 @@
         </div>
         <h4 class="mb-3 ff-base">您的订单已确认。</h4>
         <p class="text-muted mb-5">您的订单尚未发货,等待商家确认。</p>
-        <p> <a href="" class="btn btn-outline-dark">查看或管理您的订单</a></p>
+        <p> <a href="/home/orders" class="btn btn-outline-dark">查看或管理您的订单</a></p>
       </div>
     </section>
 @stop

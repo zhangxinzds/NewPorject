@@ -32,7 +32,7 @@
 	Route::post('/home/cart/addcart','Home\CartController@addcart');
 	
 	Route::group(['middleware'=>['homelogin']],function(){
-
+		//购物车订单支付流程
 		Route::get('/home/cart','Home\CartController@index')->name('cart');
 		Route::get('/home/cart/delete','Home\CartController@delete');
 		Route::get('/home/checkout','Home\CheckoutController@index');
@@ -41,7 +41,12 @@
 		Route::get('/home/checkout3/{id}','Home\CheckoutController@checkout3');
 		Route::get('/home/checkout4/{id}','Home\CheckoutController@checkout4');
 		Route::get('/home/checkout5/{id}','Home\CheckoutController@checkout5');
-
+		//订单管理
+		Route::get('/home/orders','Home\OrderController@index');
+		Route::get('/home/order/{id}','Home\OrderController@order');
+		//信息管理
+		Route::get('/home/ziliao','Home\ProController@ziliao');
+		Route::get('/home/address','Home\ProController@address');
 	});
 
 	//后台登录
