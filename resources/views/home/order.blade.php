@@ -99,14 +99,18 @@
                       <use xlink:href="#paper-bag-1"> </use>
                     </svg>订单</span>
                   <div class="badge badge-pill badge-light font-weight-normal px-3">{{$num}}</div></a>
-                    <a href="/home/ziliao" class="list-group-item d-flex justify-content-between align-items-center"><span>
-                    <svg class="svg-icon svg-icon-heavy mr-2">
-                      <use xlink:href="#male-user-1"> </use>
-                    </svg>个人资料</span></a>
                     <a href="/home/address" class="list-group-item d-flex justify-content-between align-items-center"><span>
                     <svg class="svg-icon svg-icon-heavy mr-2">
                       <use xlink:href="#navigation-map-1"></use>
-                    </svg>地址</span></a>
+                    </svg>个人资料</span></a>
+                    <a href="/home/pass" class="list-group-item d-flex justify-content-between align-items-center"><span>
+                    <svg class="svg-icon svg-icon-heavy mr-2">
+                      <use xlink:href="#male-user-1"> </use>
+                    </svg>密码</span></a>
+                    <a href="/home/header" class="list-group-item d-flex justify-content-between align-items-center"><span>
+                    <svg class="svg-icon svg-icon-heavy mr-2">
+                      <use xlink:href="#navigation-map-1"></use>
+                    </svg>头像</span></a>
                     <a href="/home/logout" class="list-group-item d-flex justify-content-between align-items-center"><span>
                     <svg class="svg-icon svg-icon-heavy mr-2">
                       <use xlink:href="#exit-1"> </use>

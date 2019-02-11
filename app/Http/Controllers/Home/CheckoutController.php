@@ -31,7 +31,7 @@ class CheckoutController extends Controller
     	$order['number'] = date('Ymdhis').substr(microtime(),2,4);
     	$order['uname'] = $user['name'];
     	$order['phone'] = $user['info']['phone'];
-    	$order['payway'] = '暂未填写';
+    	$order['payway'] = '未支付';
     	$order['addtime'] = time();
     	$order['status'] = 0;
     	$order['total'] = $req['total'];

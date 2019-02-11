@@ -50,6 +50,8 @@
             <li><a href="/admin/link/create">友链添加</a></li>
         </ul>
     </li>
+
+    <li><a href="/admin/orders"><i class="fa fa-bullhorn"></i><span>订单管理</span></a></li>
 </ul>
 @stop
 

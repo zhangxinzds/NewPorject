@@ -4,82 +4,41 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Http\Model\Admin\Orders;
+use App\Http\Model\Admin\OrderInfo;
 class OrdersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+    	$order = Orders::all();
+    	$array = ['0'=>'未支付','1'=>'待发货','2'=>'已发货','3'=>'已收货','4'=>'已评价'];
+	    foreach($order as $k => $v){
+	    	$v['status'] = $array[$v['status']];
+	    }
+    	return view('admin.order.order',['title'=>'订单列表','order'=>$order]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function status(Request $request)
     {
-        //
+    	//当前操作
+    	$ope = $request->val;
+    	//订单id
+    	$id = $request->id;
+
+    	if($ope == '发货'){
+    		$res = Orders::where('id',$id)->update(['status'=>2]);
+    		if($res){
+    			echo '已发货';
+    		}else{
+    			echo '操作失败';
+    		}
+    	}
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function orderinfo($id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    	$order = Orders::find($id);
+    	$info = OrderInfo::where('oid',$id)->get();
+    	return view('admin.order.orderinfo',['title'=>'订单详情','info'=>$info,'order'=>$order]);
     }
 }

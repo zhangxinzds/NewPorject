@@ -190,8 +190,9 @@
                 </a>
               <div aria-labelledby="userdetails" class="dropdown-menu dropdown-menu-right"> 
                 <a href="/home/orders" class="dropdown-item">订单</a>
-                <a href="/home/address" class="dropdown-item">地址</a>
-                <a href="/home/ziliao" class="dropdown-item">个人资料</a>
+                <a href="/home/address" class="dropdown-item">个人资料</a>
+                <a href="/home/pass" class="dropdown-item">密码</a>
+                <a href="/home/header" class="dropdown-item">头像</a>
                 <div class="dropdown-divider my-0"></div>
                 <a href="/home/logout" class="dropdown-item">注销</a>
                 </div>
@@ -287,7 +288,7 @@
                         $order = Orders::where('uname',$name)->where('status',0)->get();
                       @endphp
                       @if(count($order))
-                         <div class="d-flex justify-content-between"><a href="/home/checkout1" class="btn btn-outline-dark">有未支付订单!前往支付</a></div>         
+                         <div class="d-flex justify-content-between"><a href="/home/orders" class="btn btn-outline-dark">有未支付订单!前往查看</a></div>         
                       @endif
                     @endif
 

@@ -66,64 +66,37 @@
         <div class="row">
           <div class="col-lg-8 col-xl-9">
             <div class="block mb-5">
-              <div class="block-header"><strong class="text-uppercase">更改密码</strong></div>
+              <div class="block-header"><strong class="text-uppercase">头像修改</strong></div>
               <div class="block-body">
-                <form>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="password_old" class="form-label">旧密码</label>
-                        <input id="password_old" type="password" class="form-control">
-                      </div>
-                    </div>
+                <form action="/home/hedit" method="post" enctype="multipart/form-data">
+                {{csrf_field()}}
+                @if (count($errors) > 0)
+                  <div class="alert alert-danger" id="errormessage">
+                    <ul>
+                      @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
                   </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="password_1" class="form-label">新密码</label>
-                        <input id="password_1" type="password" class="form-control">
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="password_2" class="form-label">重复密码</label>
-                        <input id="password_2" type="password" class="form-control">
-                      </div>
-                    </div>
+                @endif
+                @if (session('success'))
+                  <div class="alert alert-success" id="errormessage">
+                    {{ session('success') }}
                   </div>
+                @endif
+                <div class="row">
+                  <div class=" form-group has-success">
+                      <div class="xxx" style="float:left;width:1200px;margin-left:10px">
+                      </div>   
+                      <label class="form-label">修改头像</label>
+                      <div class="input-group-lg">
+                          <a id="select" class="btn btn-outline-secondary">选择头像</a>  
+                          <input type="file" name="header" id="file_input"/>
+                      </div>
+                  </div>
+                </div>
                   <div class="text-center mt-4">
                     <button type="submit" class="btn btn-outline-dark"><i class="far fa-save mr-2"></i>修改</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="block mb-5">
-              <div class="block-header"><strong class="text-uppercase">个人资料</strong></div>
-              <div class="block-body">
-                <form>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="firstname" class="form-label">姓名</label>
-                        <input id="firstname" type="text" class="form-control">
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /.row-->
-                  <div class="row"> 
-                        <div class="form-group has-success">
-                            <div class="xxx" style="float:left;width:1200px;margin-left:10px">
-                            </div>   
-                            <label class="col-lg-3 control-label">修改头像</label>
-                            <div class="col-lg-6 input-group-lg">
-                                   <a id="select" class="btn btn-outline-dark">选择头像</a>  
-                                    <input type="file" name="pic" id="file_input"/>
-                            </div>
-                        </div>
-                  </div>
-                  <!-- /.row-->
-                  <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-outline-dark"><i class="far fa-save mr-2"></i>保存修改</button>
                   </div>
                 </form>
               </div>
@@ -135,19 +108,24 @@
               <div class="customer-profile"><a href="#" class="d-inline-block"><img src="{{$user['header']}}" class="img-fluid rounded-circle customer-image"></a>
                 <h5>{{$user['name']}}</h5>
               </div>
-              <nav class="list-group customer-nav"><a href="/home/orders" class="active list-group-item d-flex justify-content-between align-items-center"><span>
+              <nav class="list-group customer-nav">
+                  <a href="/home/orders" class="list-group-item d-flex justify-content-between align-items-center"><span>
                     <svg class="svg-icon svg-icon-heavy mr-2">
                       <use xlink:href="#paper-bag-1"> </use>
                     </svg>订单</span>
                   <div class="badge badge-pill badge-light font-weight-normal px-3">{{$num}}</div></a>
-                  <a href="/home/ziliao" class="list-group-item d-flex justify-content-between align-items-center"><span>
-                    <svg class="svg-icon svg-icon-heavy mr-2">
-                      <use xlink:href="#male-user-1"> </use>
-                    </svg>个人资料</span></a>
                     <a href="/home/address" class="list-group-item d-flex justify-content-between align-items-center"><span>
                     <svg class="svg-icon svg-icon-heavy mr-2">
-                      <use xlink:href="#navigation-map-1"> </use>
-                    </svg>地址</span></a>
+                      <use xlink:href="#navigation-map-1"></use>
+                    </svg>个人资料</span></a>
+                    <a href="/home/pass" class="list-group-item d-flex justify-content-between align-items-center"><span>
+                    <svg class="svg-icon svg-icon-heavy mr-2">
+                      <use xlink:href="#male-user-1"> </use>
+                    </svg>密码</span></a>
+                    <a href="/home/header" class="active list-group-item d-flex justify-content-between align-items-center"><span>
+                    <svg class="svg-icon svg-icon-heavy mr-2">
+                      <use xlink:href="#navigation-map-1"></use>
+                    </svg>头像</span></a>
                     <a href="/home/logout" class="list-group-item d-flex justify-content-between align-items-center"><span>
                     <svg class="svg-icon svg-icon-heavy mr-2">
                       <use xlink:href="#exit-1"> </use>
@@ -163,6 +141,10 @@
 
 @section('js')
 <script>
+  //错误提示
+  $('#errormessage').delay(2000).slideUp(1000);
+
+
   //多图片预览    
 window.onload = function(){    
     var input = document.getElementById("file_input");    

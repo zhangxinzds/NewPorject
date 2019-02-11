@@ -16,7 +16,7 @@ class OrderController extends Controller
 	    $name = $user['name'];
 	    $order = Orders::where('uname',$name)->get();
 	    $num = Orders::where('uname',$user['name'])->count();
-	    $array = ['0'=>'未支付','1'=>'待发货','2'=>'待收货','3'=>'已完成'];
+	    $array = ['0'=>'未支付','1'=>'待发货','2'=>'已发货','3'=>'已收货','4'=>'已评价'];
 	    foreach($order as $k => $v){
 	    	$v['status'] = $array[$v['status']];
 	    }
@@ -30,5 +30,30 @@ class OrderController extends Controller
     	$or = Orders::where('id',$id)->first();
     	$num = Orders::where('uname',$user['name'])->count();
     	return view('home.order',['title'=>'订单详情','order'=>$order,'or'=>$or,'user'=>$user,'num'=>$num]);
+    }
+
+    public function status(Request $request)
+    {
+        $ope = $request->val;
+        $id = $request->id;
+        if($ope == '确认收货'){
+            $res = Orders::where('id',$id)->update(['status'=>3]);
+            if($res){
+                echo '已收货';
+            }else{
+                echo '操作失败';
+            }
+        }
+    }
+
+    public function cancel(Request $request)
+    {
+        $id = $request->id;
+        $rs = Orders::where('id',$id)->delete();
+        if($rs){
+            echo 1;
+        }else{
+            echo 2;
+        }
     }
 }

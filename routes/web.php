@@ -44,9 +44,15 @@
 		//订单管理
 		Route::get('/home/orders','Home\OrderController@index');
 		Route::get('/home/order/{id}','Home\OrderController@order');
+		Route::get('/home/status','Home\OrderController@status');
+		Route::get('/home/cancel','Home\OrderController@cancel');
 		//信息管理
-		Route::get('/home/ziliao','Home\ProController@ziliao');
+		Route::get('/home/pass','Home\ProController@pass');
+		Route::get('/home/header','Home\ProController@header');
+		Route::post('/home/hedit','Home\ProController@hedit');
+		Route::post('/home/pedit','Home\ProController@pedit');
 		Route::get('/home/address','Home\ProController@address');
+		Route::post('/home/addressedit','Home\ProController@addressedit');
 	});
 
 	//后台登录
@@ -94,11 +100,14 @@
 		Route::resource('/admin/carousel','Admin\CarouselController');
 		Route::get('/admin/carajax','Admin\CarouselController@ajax');
 
-		//订单
-		Route::resource('/admin/orders','Admin\OrdersController');
 
 		//友情链接
 		Route::resource('/admin/link','Admin\AdvController');
+
+		//订单
+		Route::get('/admin/orders','Admin\OrdersController@index');
+		Route::get('/admin/orders/status','Admin\OrdersController@status');
+		Route::get('/admin/orderinfo/{id}','Admin\OrdersController@orderinfo');
 	});
 
 

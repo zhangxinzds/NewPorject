@@ -7,9 +7,9 @@
 <ul class="nav nav-pills nav-stacked custom-nav">
     <li class=""><a href="/admin"><i class="fa fa-home"></i> <span>首页</span></a></li>
 
-    <li class="menu-list nav-active"><a href=""><i class="fa fa-laptop"></i> <span>管理员</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>管理员</span></a>
         <ul class="sub-menu-list">
-            <li class="active"><a href="/admin/manager">管理员列表</a></li>
+            <li><a href="/admin/manager">管理员列表</a></li>
             <li><a href="/admin/manager/create">新增管理员</a></li>
         </ul>
     </li>
@@ -23,7 +23,7 @@
 
     <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>分类管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/type">分类列表</a></li>
+            <li  class="active"><a href="/admin/type">分类列表</a></li>
             <li><a href="/admin/type/create">分类添加</a></li>
         </ul>
     </li>
@@ -49,20 +49,20 @@
         </ul>
     </li>
 
-    <li><a href="/admin/orders"><i class="fa fa-bullhorn"></i><span>订单管理</span></a></li>
+    <li class="active"><a href="/admin/orders"><i class="fa fa-bullhorn"></i><span>订单管理</span></a></li>
 </ul>
 @stop
 
 @section('page-heading')
 <div class="page-heading">
     <h3>
-        管理员管理
+        订单管理
     </h3>
     <ul class="breadcrumb">
         <li>
-            <a href="/admin/user">管理员管理</a>
+            <a href="/admin/orders">订单管理</a>
         </li>
-        <li class="active">管理员列表</li>
+        <li class="active">订单列表</li>
     </ul>
 </div>
 @stop
@@ -75,7 +75,7 @@
     <div class="col-sm-12">
         <section class="panel">
             <header class="panel-heading">
-                管理员列表
+                分类列表
                 <span class="tools pull-right">
                     <a href="javascript:;" class="fa fa-chevron-down">
                     </a>
@@ -92,19 +92,25 @@
                                     ID
                                 </th>
                                 <th>
-                                    用户名
+                                    订单编号
                                 </th>
                                 <th>
-                                    姓名
+                                    买家账号
                                 </th>
                                 <th>
-                                    头像
+                                    联系电话
                                 </th>
                                 <th>
-                                    添加时间
+                                    订单日期
                                 </th>
                                 <th>
-                                    状态
+                                    订单状态
+                                </th>
+                                <th>
+                                    总金额
+                                </th>
+                                <th>
+                                    查看
                                 </th>
                                 <th>
                                     操作
@@ -112,70 +118,82 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php $i = 1; @endphp @foreach($rs as $k=>$v)
+                           @php
+                               $i = 1;
+                           @endphp
+                           @foreach($order as $k => $v)
                             <tr class="gradeA">
-                                <td style="line-height:50px">
+                                <td>
                                     {{$i++}}
                                 </td>
-                                <td class="tname" name="{{$v->id}}" style="line-height:50px">
-                                    {{$v->name}}
+                                <td>
+                                    {{$v['number']}}
                                 </td>
-                                <td style="line-height:50px">
-                                    {{$v->tname}}
+                                <td>
+                                    {{$v['uname']}}
                                 </td>
-                                <td style="line-height:50px">
-                                    <img src="{{$v->header}}" style="width:50px;height:50px";>
+                                <td>
+                                    {{$v['phone']}}
                                 </td>
-                                <td style="line-height:50px">
-                                    {{date('Y-m-d H:i:s',$v->addtime)}}
+                                <td>
+                                    {{date('Y-m-d H:i:s',$v['addtime'])}}
                                 </td>
-                                <td class="col-md-2">
-                                    <div class="col-lg-10 input-group" style="margin-top:10px">
-                                        <div class="slide-toggle">
-                                            <div style="position: relative;left:100px">
-                                                @if(($v->status)==1)
-                                                <input type="checkbox" value="{{$v->id}}" name="{{$v->status}}" class="js-switch"
-                                                checked/>
-                                                @else
-                                                <input type="checkbox" value="{{$v->id}}" name="{{$v->status}}" class="js-switch"
-                                                />
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
+                                <td class="status">
+                                    {{$v['status']}}
                                 </td>
-                                <td style="text-align: center" class="col-md-3">
-                                    <a class="btn btn-info" href="/admin/manager/{{$v->id}}/edit">
-                                        修改
-                                    </a>
-                                    <form action="/admin/manager/{{$v->id}}" method="post" style="display: inline">
-                                        {{csrf_field()}}
-                                        {{method_field('DELETE')}}
-                                        <button class="btn btn-success" onclick="return confirm('确定删除?')">删除</button>
-                                    </form>
+                                <td>
+                                    ${{$v['total']}}
+                                </td>
+                                <td>
+                                    <a href="/admin/orderinfo/{{$v['id']}}" class="btn btn-default">查看详情</a>
+                                </td>
+                                <td id = "{{$v['id']}}">
+                                    @switch($v['status'])
+                                    @case('未支付')
+                                        <button class="btn btn-primary">待支付</button>
+                                    @break
+                                    @case('待发货')
+                                        <button class="btn btn-info operation">发货</button>
+                                    @break
+                                    @case('已发货')
+                                        <button class="btn btn-warning">待收货</button>
+                                    @break
+                                    @case('已收货')
+                                        <button class="btn btn-success">待评价</button>
+                                    @break
+                                    @case('已评价')
+                                        <button class="btn btn-danger">查看评价</button>
+                                    @break
+                                    @endswitch
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
-                            <tr>
+                           <tr>
                                 <th>
                                     ID
                                 </th>
                                 <th>
-                                    用户名
+                                    订单编号
                                 </th>
                                 <th>
-                                    姓名
+                                    买家账号
                                 </th>
                                 <th>
-                                    头像
+                                    联系电话
                                 </th>
                                 <th>
-                                    添加时间
+                                    订单日期
                                 </th>
                                 <th>
-                                    状态
+                                    订单状态
+                                </th>
+                                <th>
+                                    总金额
+                                </th>
+                                <th>
+                                    查看
                                 </th>
                                 <th>
                                     操作
@@ -191,17 +209,20 @@
 @stop
 
 @section('js')
-    <script>
-    //显示按钮ajax操作
-        $('.slide-toggle').click(function(){
-
-            var id = $(this).find('input').val();
-
-            var status = $(this).find('input').attr('name');
-
-            $.get('/admin/magajax',{id:id,status:status},function(res){
-
-            })
-        })
+<script>
+    $('.operation').click(function(){
+        that = $(this);
+        var val = $(this).text();
+        var id = $(this).parent().attr('id');
+        $.get('/admin/orders/status',{val:val,id:id},function(res){
+            if(res == '已发货'){
+                that.text('待收货').removeClass('btn-info').addClass('btn-warning');
+                that.parents('tr').find('.status').text('已发货');
+            }else{
+                alert('操作失败');
+            }
+        }) 
+       
+    })
 </script>
 @stop
