@@ -60,7 +60,7 @@
     </h3>
     <ul class="breadcrumb">
         <li>
-            <a href="/admin/user">管理员管理</a>
+            <a href="/admin/manager">管理员管理</a>
         </li>
         <li class="active">管理员列表</li>
     </ul>
@@ -145,13 +145,14 @@
                                     </div>
                                 </td>
                                 <td style="text-align: center" class="col-md-3">
+                                <a href="/admin/managerrole/{{$v['id']}}" class="btn btn-success">角色</a>
                                     <a class="btn btn-info" href="/admin/manager/{{$v->id}}/edit">
                                         修改
                                     </a>
                                     <form action="/admin/manager/{{$v->id}}" method="post" style="display: inline">
                                         {{csrf_field()}}
                                         {{method_field('DELETE')}}
-                                        <button class="btn btn-success" onclick="return confirm('确定删除?')">删除</button>
+                                        <button class="btn btn-danger" onclick="return confirm('确定删除?')">删除</button>
                                     </form>
                                 </td>
                             </tr>

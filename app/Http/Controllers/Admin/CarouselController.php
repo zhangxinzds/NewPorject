@@ -29,7 +29,6 @@ class CarouselController extends Controller
 /*        foreach($rs as $k=>$v){
             if($k == 0){
                 $pre = $v['lid'];
-                $a = $pre;
             }elseif($k > 0){
                 $pre = $rs[$k-1]['lid'];
             }

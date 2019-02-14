@@ -17,9 +17,25 @@
 
   <!--icheck-->
   <link href="/admins/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/minimal/red.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/minimal/green.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/minimal/blue.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/minimal/yellow.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/minimal/purple.css" rel="stylesheet">
+  
   <link href="/admins/js/iCheck/skins/square/square.css" rel="stylesheet">
   <link href="/admins/js/iCheck/skins/square/red.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/square/green.css" rel="stylesheet">
   <link href="/admins/js/iCheck/skins/square/blue.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/square/yellow.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/square/purple.css" rel="stylesheet">
+
+  <link href="/admins/js/iCheck/skins/flat/grey.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/flat/red.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/flat/green.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/flat/blue.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/flat/yellow.css" rel="stylesheet">
+  <link href="/admins/js/iCheck/skins/flat/purple.css" rel="stylesheet">
 
   <!--ios7-->
   <link rel="stylesheet" type="text/css" href="/admins/js/ios-switch/switchery.css" />
@@ -37,7 +53,8 @@
   <link href="/admins/css/style.css" rel="stylesheet">
   <link href="/admins/css/style-responsive.css" rel="stylesheet">
 
-
+  <!--multi-select-->
+  <link rel="stylesheet" type="text/css" href="/admins/js/jquery-multi-select/css/multi-select.css" />
 
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -128,6 +145,10 @@
                         <li><a class="menuchild" href="/admin/link/create">友链添加</a></li>
                     </ul>
                 </li>
+                
+                <li><a href="/admin/role"><i class="fa fa-bullhorn"></i><span>角色管理</span></a></li>
+
+                <li><a href="/admin/permission"><i class="fa fa-bullhorn"></i><span>权限管理</span></a></li>
 
                 <li><a href="/admin/orders"><i class="fa fa-bullhorn"></i><span>订单管理</span></a></li>
             @show
@@ -848,6 +869,10 @@
 <script type="text/javascript" language="javascript" src="/admins/js/advanced-datatable/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="/admins/js/data-tables/DT_bootstrap.js"></script>
 
+<!--multi-select-->
+<script type="text/javascript" src="/admins/js/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="/admins/js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+<script src="/admins/js/multi-select-init.js"></script>
 <!--dynamic table initialization -->
 @section('dy')
 <script src="/admins/js/dynamic_table_init.js"></script>

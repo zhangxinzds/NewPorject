@@ -71,6 +71,8 @@
 		//管理员
 		Route::resource('/admin/manager','Admin\ManagerController');
 		Route::get('/admin/magajax','Admin\ManagerController@ajax');
+		Route::get('/admin/managerrole/{id}','Admin\PerController@managerrole');
+		Route::post('/admin/managerroleadd/{id}','Admin\PerController@managerroleadd');
 
 		//用户
 		Route::resource('/admin/user','Admin\UserController');
@@ -108,6 +110,17 @@
 		Route::get('/admin/orders','Admin\OrdersController@index');
 		Route::get('/admin/orders/status','Admin\OrdersController@status');
 		Route::get('/admin/orderinfo/{id}','Admin\OrdersController@orderinfo');
+
+		//角色
+		Route::resource('/admin/role','Admin\RoleController');
+		Route::post('/admin/roleajax','Admin\RoleController@ajax');
+		Route::get('/admin/peradd/{id}','Admin\RoleController@peradd');
+		Route::get('/admin/persave/{id}','Admin\RoleController@persave');
+		//权限
+		Route::get('/admin/permission','Admin\PerController@index');
+		Route::post('/admin/permissionadd','Admin\PerController@add');
+		Route::post('/admin/permissionedit','Admin\PerController@edit');
+		Route::get('/admin/permissiondelete/{id}','Admin\PerController@delete');
 	});
 
 

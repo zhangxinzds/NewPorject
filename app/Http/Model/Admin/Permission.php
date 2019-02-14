@@ -4,14 +4,9 @@ namespace App\Http\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Manager extends Model
+class Permission extends Model
 {
-      /**
-     * 与模型关联的数据表
-     *
-     * @var string
-     */
-    protected $table = 'manager';
+    protected $table = 'permission';
 
     protected $primarykey = 'id';
 
@@ -28,9 +23,4 @@ class Manager extends Model
 	 * @var array
 	 */
 	protected $guarded = [];
-
-    public function role()
-    {
-        return $this->belongsToMany('App\Http\Model\Admin\Role', 'user_role', 'user_id', 'role_id');
-    }
 }
