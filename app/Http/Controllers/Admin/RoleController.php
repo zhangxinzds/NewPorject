@@ -51,7 +51,7 @@ class RoleController extends Controller
             return back()->with('error','添加失败');
         }
     }
-
+    //修改
     public function ajax(Request $request)
     {
         $id = $request->id;
@@ -85,7 +85,8 @@ class RoleController extends Controller
     public function peradd($id)
     {
         $rs = Role::find($id);
-        $per = Permission::all();
+        //一定要排序,不然前台遍历的时候会乱
+        $per = Permission::orderBy('group')->get();
         $arr = $rs->per;
         $array = [];
         foreach($arr as $k => $v){

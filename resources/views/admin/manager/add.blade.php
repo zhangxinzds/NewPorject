@@ -3,52 +3,53 @@
 @section('title',$title)
 
 @section('menu')
+<!--左侧菜单 start-->
 <ul class="nav nav-pills nav-stacked custom-nav">
-    <li class=""><a href="{{route('admin')}}"><i class="fa fa-home"></i> <span>首页</span></a></li>
+    <li><a href="{{ route('admin')}}"><i class="fa fa-home"></i> <span>首页</span></a></li>
 
-    <li class="menu-list nav-active" ><a href=""><i class="fa fa-laptop"></i> <span>管理员</span></a>
+    <li class="menu-list nav-active"><a href=""><i class="fa fa-user"></i> <span>管理员</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/manager">管理员列表</a></li>
-            <li class="active"><a href="/admin/manager/create">新增管理员</a></li>
+            <li><a class="menuchild" href="/admin/manager">管理员列表</a></li>
+            <li class="active"><a class="menuchild" href="/admin/manager/create">新增管理员</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>用户管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-gears"></i> <span>系统管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/user">用户列表</a></li>
-            <li><a href="/admin/user/create">用户添加</a></li>
+            <li><a class="menuchild" href="/admin/role">角色管理</a></li>
+            <li><a class="menuchild" href="/admin/permission">权限管理</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>分类管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-users"></i> <span>用户管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/type">分类列表</a></li>
-            <li><a href="/admin/type/create">分类添加</a></li>
+            <li><a class="menuchild" href="/admin/user">用户列表</a></li>
+            <li><a class="menuchild" href="/admin/user/create">用户添加</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>商品管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-list"></i> <span>分类管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/goods">商品列表</a></li>
-            <li><a href="/admin/goods/create">商品添加</a></li>
+            <li><a class="menuchild" href="/admin/type">分类列表</a></li>
+            <li><a class="menuchild" href="/admin/type/create">分类添加</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>轮播管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-shopping-cart"></i> <span>商品管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/carousel">轮播列表</a></li>
-            <li><a href="/admin/carousel/create">轮播添加</a></li>
+            <li><a class="menuchild" href="/admin/goods">商品列表</a></li>
+            <li><a class="menuchild" href="/admin/goods/create">商品添加</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>友链管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-picture-o"></i> <span>轮播管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/link">友链列表</a></li>
-            <li><a href="/admin/link/create">友链添加</a></li>
+            <li><a class="menuchild" href="/admin/carousel">轮播列表</a></li>
+            <li><a class="menuchild" href="/admin/carousel/create">轮播添加</a></li>
         </ul>
     </li>
 
-    <li><a href="/admin/orders"><i class="fa fa-bullhorn"></i><span>订单管理</span></a></li>
+    <li><a href="/admin/orders"><i class="fa fa-list-alt"></i><span>订单管理</span></a></li>
 </ul>
 @stop
 

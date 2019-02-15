@@ -209,7 +209,7 @@ class GoodsController extends Controller
             $rs = Goods::where('id',$id)->update(['status'=> '0']);
         }
     }
-
+    //商品图片删除
     public function ajax(Request $request)
     {
        $id = $request->id;
@@ -223,7 +223,7 @@ class GoodsController extends Controller
        }
 
     }
-
+    //颜色规格查看
     public function spe($id)
     {
         $rs = Goods::find($id)->color()->get();

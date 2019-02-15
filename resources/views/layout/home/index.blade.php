@@ -288,10 +288,9 @@
                         $order = Orders::where('uname',$name)->where('status',0)->get();
                       @endphp
                       @if(count($order))
-                         <div class="d-flex justify-content-between"><a href="/home/orders" class="btn btn-outline-dark">有未支付订单!前往查看</a></div>         
+                         <div class="d-flex justify-content-between"><a href="/home/orders" class="btn btn-outline-dark">有未支付订单!前往查看</a></div>   
                       @endif
                     @endif
-
                   </div>
                 </div>
               </div>

@@ -1,61 +1,53 @@
 @extends('layout.admin.index')
-
 @section('title',$title)
-<meta name="csrf-token" content="{{ csrf_token() }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 @section('menu')
-
+<!--左侧菜单 start-->
 <ul class="nav nav-pills nav-stacked custom-nav">
-    <li class=""><a href="{{route('admin')}}"><i class="fa fa-home"></i> <span>首页</span></a></li>
+    <li><a href="{{ route('admin')}}"><i class="fa fa-home"></i> <span>首页</span></a></li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>管理员</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-user"></i> <span>管理员</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/manager">管理员列表</a></li>
-            <li><a href="/admin/manager/create">新增管理员</a></li>
+            <li><a class="menuchild" href="/admin/manager">管理员列表</a></li>
+            <li><a class="menuchild" href="/admin/manager/create">新增管理员</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>用户管理</span></a>
+    <li class="menu-list nav-active"><a href=""><i class="fa fa-gears"></i> <span>系统管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/user">用户列表</a></li>
-            <li><a href="/admin/user/create">用户添加</a></li>
+            <li><a class="menuchild" href="/admin/role">角色管理</a></li>
+            <li class="active"><a class="menuchild" href="/admin/permission">权限管理</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>分类管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-users"></i> <span>用户管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/type">分类列表</a></li>
-            <li><a href="/admin/type/create">分类添加</a></li>
+            <li><a class="menuchild" href="/admin/user">用户列表</a></li>
+            <li><a class="menuchild" href="/admin/user/create">用户添加</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>商品管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-list"></i> <span>分类管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/goods">商品列表</a></li>
-            <li><a href="/admin/goods/create">商品添加</a></li>
+            <li><a class="menuchild" href="/admin/type">分类列表</a></li>
+            <li><a class="menuchild" href="/admin/type/create">分类添加</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>轮播管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-shopping-cart"></i> <span>商品管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/carousel">轮播列表</a></li>
-            <li><a href="/admin/carousel/create">轮播添加</a></li>
+            <li><a class="menuchild" href="/admin/goods">商品列表</a></li>
+            <li><a class="menuchild" href="/admin/goods/create">商品添加</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>友链管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-picture-o"></i> <span>轮播管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/link">友链列表</a></li>
-            <li><a href="/admin/link/create">友链添加</a></li>
+            <li><a class="menuchild" href="/admin/carousel">轮播列表</a></li>
+            <li><a class="menuchild" href="/admin/carousel/create">轮播添加</a></li>
         </ul>
     </li>
 
-    <li><a href="/admin/role"><i class="fa fa-bullhorn"></i><span>角色管理</span></a></li>
-
-    <li class="active"><a href="/admin/permission"><i class="fa fa-bullhorn"></i><span>权限管理</span></a></li>
-
-    <li><a href="/admin/orders"><i class="fa fa-bullhorn"></i><span>订单管理</span></a></li>
-
+    <li><a href="/admin/orders"><i class="fa fa-list-alt"></i><span>订单管理</span></a></li>
 </ul>
 @stop
 
@@ -76,6 +68,7 @@
 @section('content')
 <style>
     th,td{text-align: center}
+
 </style>
  <div class="wrapper">
     <div class="row">
@@ -144,7 +137,11 @@
                                     $num = DB::table('permission')->where('group',$v['group'])->count();
                                     @endphp
                                     @if($j%$num == 1)
-                                    <td rowspan="{{$num}}" style="line-height:{{$num*55}}px;background-color:white">
+                                    <td rowspan="{{$num}}" style="line-height:{{$num*50}}px;background-color:white">
+                                        {{$v['group']}}
+                                    </td>
+                                    @elseif($num == 1)
+                                    <td rowspan="{{$num}}" style="background-color:white">
                                         {{$v['group']}}
                                     </td>
                                     @endif
@@ -171,15 +168,14 @@
                                 @endphp
                                 @endforeach
                             </tbody>
-                            
                         </table>
                     </div>
                 </div>
             </section>
         </div>
-</div> 
-    </div>
+    </div> 
 </div>
+
 
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 100px;">
@@ -202,6 +198,7 @@
                         <div class="col-lg-7 input-group-lg">
                             <select name="group" class="selectpicker">
                                 <option value="管理员模块">管理员模块</option>
+                                <option value="系统模块">系统模块</option>
                                 <option value="用户模块">用户模块</option>
                                 <option value="分类模块">分类模块</option>
                                 <option value="商品模块">商品模块</option>
@@ -215,13 +212,13 @@
                     <div class="form-group has-success">
                         <label class="col-lg-3 control-label">权限名</label>
                         <div class="col-lg-3 input-group-lg">
-                            <input type="text" name="prename" placeholder="" id="f-name" class="form-control">
+                            <input type="text" name="pername" placeholder="" id="f-name" class="form-control">
                         </div>
                     </div>
                     <div class="form-group has-success">
                         <label class="col-lg-3 control-label">URL</label>
                         <div class="col-lg-7 input-group-lg">
-                            <input type="text" name="url" placeholder="" id="f-name" class="form-control">
+                            <input type="text" name="url" value="App\Http\Controllers\Admin\" placeholder="" id="f-name" class="form-control">
                         </div>
                     </div>
                  <!-- 内容end -->
@@ -254,7 +251,7 @@
                     <div class="form-group has-success">
                         <label class="col-lg-3 control-label">权限名</label>
                         <div class="col-lg-3 input-group-lg">
-                            <input type="text" name="prename" placeholder="{{$v['prename']}}" id="f-name" class="form-control">
+                            <input type="text" name="pername" placeholder="{{$v['pername']}}" id="f-name" class="form-control">
                             <input type="text" name="id" value="{{$v['id']}}" style="display:none">
                         </div>
                     </div>
@@ -278,12 +275,8 @@
 @stop
 
 @section('js')
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-
 <script>
     $('#errormessage').delay(2000).slideUp(1000);
 </script>
-
-
 @stop

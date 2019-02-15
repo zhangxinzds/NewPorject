@@ -3,52 +3,53 @@
 @section('title',$title)
 
 @section('menu')
+<!--左侧菜单 start-->
 <ul class="nav nav-pills nav-stacked custom-nav">
-    <li class=""><a href="{{route('admin')}}"><i class="fa fa-home"></i> <span>首页</span></a></li>
+    <li><a href="{{ route('admin')}}"><i class="fa fa-home"></i> <span>首页</span></a></li>
 
-    <li class="menu-list nav-active" ><a href=""><i class="fa fa-laptop"></i> <span>管理员</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-user"></i> <span>管理员</span></a>
         <ul class="sub-menu-list">
-            <li  class="active"><a href="/admin/manager">管理员列表</a></li>
-            <li><a href="/admin/manager/create">新增管理员</a></li>
+            <li><a class="menuchild" href="/admin/manager">管理员列表</a></li>
+            <li><a class="menuchild" href="/admin/manager/create">新增管理员</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>用户管理</span></a>
+    <li class="menu-list nav-active"><a href=""><i class="fa fa-gears"></i> <span>系统管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/user">用户列表</a></li>
-            <li><a href="/admin/user/create">用户添加</a></li>
+            <li class="active"><a class="menuchild" href="/admin/role">角色管理</a></li>
+            <li><a class="menuchild" href="/admin/permission">权限管理</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>分类管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-users"></i> <span>用户管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/type">分类列表</a></li>
-            <li><a href="/admin/type/create">分类添加</a></li>
+            <li><a class="menuchild" href="/admin/user">用户列表</a></li>
+            <li><a class="menuchild" href="/admin/user/create">用户添加</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>商品管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-list"></i> <span>分类管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/goods">商品列表</a></li>
-            <li><a href="/admin/goods/create">商品添加</a></li>
+            <li><a class="menuchild" href="/admin/type">分类列表</a></li>
+            <li><a class="menuchild" href="/admin/type/create">分类添加</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>轮播管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-shopping-cart"></i> <span>商品管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/carousel">轮播列表</a></li>
-            <li><a href="/admin/carousel/create">轮播添加</a></li>
+            <li><a class="menuchild" href="/admin/goods">商品列表</a></li>
+            <li><a class="menuchild" href="/admin/goods/create">商品添加</a></li>
         </ul>
     </li>
 
-    <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>友链管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-picture-o"></i> <span>轮播管理</span></a>
         <ul class="sub-menu-list">
-            <li><a href="/admin/link">友链列表</a></li>
-            <li><a href="/admin/link/create">友链添加</a></li>
+            <li><a class="menuchild" href="/admin/carousel">轮播列表</a></li>
+            <li><a class="menuchild" href="/admin/carousel/create">轮播添加</a></li>
         </ul>
     </li>
 
-    <li><a href="/admin/orders"><i class="fa fa-bullhorn"></i><span>订单管理</span></a></li>
+    <li><a href="/admin/orders"><i class="fa fa-list-alt"></i><span>订单管理</span></a></li>
 </ul>
 @stop
 
@@ -82,17 +83,20 @@
                     </header>
                     @if (session('error'))
                         <div class="alert alert-success" id="message">
-                            {{ session('error') }}
+                            {{ session('error')}}
                         </div>
                     @endif                    
                     @if (session('success'))
                         <div class="alert alert-success" id="message">
-                            {{ session('success') }}
+                            {{ session('success')}}
                         </div>
                     @endif
                     <div class="panel-body">
                         <form role="form" class="form-horizontal adminex-form" style="margin-top:20px">
                             <div class="form-group has-success">
+
+                    <input type="checkbox" class="quanxuan">全选
+
                             <label class="col-lg-1 control-label">角色</label>
                                 <div class="col-lg-2 input-group-lg">
                                     <input type="text" name="name" placeholder="" value="{{$rs['rolename']}}" id="f-name" value="" readonly class="form-control">
@@ -120,7 +124,11 @@
                                         @endphp
                                     <tr>
                                         @if($j%$num == 1)
-                                        <td rowspan="{{$num}}" style="line-height:{{$num*30}}px;">
+                                        <td rowspan="{{$num}}" style="line-height:{{$num*55}}px;">
+                                            <label><input num="{{$num}}" type="checkbox" class="group">{{$v['group']}}</label>
+                                        </td>
+                                        @elseif($num == 1)
+                                        <td rowspan="{{$num}}">
                                             <label><input num="{{$num}}" type="checkbox" class="group">{{$v['group']}}</label>
                                         </td>
                                         @endif
@@ -155,25 +163,35 @@
 
 @section('js')
 <script>
+    //全选
+    $('.quanxuan').click(function(){
+        var singles = $('input:checkbox');
+
+        if($(this).attr('checked')){
+             for (var i = 0; i< singles.length;i++) {
+                $(singles[i]).attr('checked','true');
+            }
+        }else{
+            for (var i = 0; i< singles.length;i++) {
+                $(singles[i]).removeAttr('checked');
+            }
+        }
+    })
 
     //模块多选
     $('.group').click(function(){
-        var a = $(this).parents('tr');
-        var b = a.nextAll();
-        //num当前tr之后几个子选项
-        var num = $(this).attr('num')-1;
-        //当前tr包括之后的紧挨的几个tr中的多选按钮
+       var singles = $(this).parents('tbody').find('.single');
+
         if($(this).attr('checked')){
-            for (var i = 0; i< num;i++) {
-                a.find('.single').attr('checked','true');
-                $(b[i]).find('.single').attr('checked','true');
+            for (var i = 0; i< singles.length;i++) {
+                $(singles[i]).attr('checked','true');
             }
         }else{
-            for (var i = 0; i< num;i++) {
-                a.find('.single').removeAttr('checked');
-                $(b[i]).find('.single').removeAttr('checked');
+            for (var i = 0; i< singles.length;i++) {
+                $(singles[i]).removeAttr('checked');
             }
         }
+        quanxuan();
     })
 
     //single有一个不选中,group也不被选中
@@ -203,6 +221,7 @@
         if(num == arr.length){
             group.attr('checked','checked');
         }
+        quanxuan();
     })
 
     //页面初始化时,如果一开始所有模块中的权限被选中,那么group也要被选中
@@ -228,7 +247,30 @@
                 group.attr('checked','checked');
             }
         })
+        quanxuan();
     })
+
+    //如果所有single被选中,那么全选也要被选中
+    function quanxuan(){
+        var singles = $('.single');
+        var array = [];
+        singles.each(function(){
+            var sta = $(this).attr('checked');
+            array.push(sta)
+        })
+
+        var num = 0;
+        for(var i = 0;i<array.length;i++){
+            if(array[i] == 'checked'){
+                num++;
+            }
+        }
+        if(num == array.length){
+            $('.quanxuan').attr('checked','checked');
+        }else{
+            $('.quanxuan').removeAttr('checked');
+        }
+    }
 
     //消息提示
     $('#message').delay(2000).slideUp(1000);

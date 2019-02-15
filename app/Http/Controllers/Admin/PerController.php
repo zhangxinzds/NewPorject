@@ -11,7 +11,8 @@ use DB;
 class PerController extends Controller
 {
     public function index()
-    {
+    {   
+        //一定要排序,不然前台遍历的时候会乱
     	$rs = Permission::orderBy('group')->get();
 
     	return view('admin.permission.permission',['title'=>'权限管理','rs'=>$rs]);
@@ -20,11 +21,10 @@ class PerController extends Controller
     public function add(Request $request)
     {
         $this->validate($request, [
-        'prename' => 'required|regex:/\p{Han}/u',
+        'pername' => 'required',
         'url' => 'required'
         ],[
-        'prename.required' => '请添加权限名',
-        'prename.regex' => '请输入权限名称',
+        'pername.required' => '请添加权限名',
         'url.required' => '请输入url地址'
         ]);
     	$rs = $request->except('_token');

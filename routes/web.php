@@ -62,7 +62,7 @@
 	//验证码
 	Route::get('/admin/captcha','Admin\LoginController@captcha')->name('captcha');
 
-	Route::group(['middleware'=>['adminlogin']],function(){
+	Route::group(['middleware'=>['adminlogin','roleper']],function(){
 		//后台首页
 		Route::get('/admin','Admin\IndexController@index')->name('admin');
 		Route::post('/admin/header','Admin\IndexController@header')->name('header');
@@ -71,7 +71,9 @@
 		//管理员
 		Route::resource('/admin/manager','Admin\ManagerController');
 		Route::get('/admin/magajax','Admin\ManagerController@ajax');
+		//角色查看
 		Route::get('/admin/managerrole/{id}','Admin\PerController@managerrole');
+		//角色添加
 		Route::post('/admin/managerroleadd/{id}','Admin\PerController@managerroleadd');
 
 		//用户
@@ -101,10 +103,6 @@
 		//轮播图
 		Route::resource('/admin/carousel','Admin\CarouselController');
 		Route::get('/admin/carajax','Admin\CarouselController@ajax');
-
-
-		//友情链接
-		Route::resource('/admin/link','Admin\AdvController');
 
 		//订单
 		Route::get('/admin/orders','Admin\OrdersController@index');
