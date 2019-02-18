@@ -121,8 +121,8 @@
                               <use xlink:href="#delivery-time-1"></use>
                             </svg>
                             <div>
-                              <h6 class="text-uppercase">Free shipping &amp; return</h6>
-                              <p class="mb-0 text-muted text-sm">Free Shipping over $300</p>
+                              <h6 class="text-uppercase">免运费</h6>
+                              <p class="mb-0 text-muted text-sm">满$300免运费</p>
                             </div>
                           </div>
                         </div>
@@ -132,8 +132,8 @@
                               <use xlink:href="#money-1"> </use>
                             </svg>
                             <div>
-                              <h6 class="text-uppercase">Money back guarantee</h6>
-                              <p class="mb-0 text-muted text-sm">30 Days Money Back</p>
+                              <h6 class="text-uppercase">退款保证</h6>
+                              <p class="mb-0 text-muted text-sm">30天退款>
                             </div>
                           </div>
                         </div>
@@ -144,7 +144,7 @@
                             </svg>
                             <div>
                               <h6 class="text-uppercase">020-800-456-747</h6>
-                              <p class="mb-0 text-muted text-sm">24/7 Available Support</p>
+                              <p class="mb-0 text-muted text-sm">24小时客服</p>
                             </div>
                           </div>
                         </div>
@@ -154,8 +154,8 @@
                               <use xlink:href="#secure-payment-1"> </use>
                             </svg>
                             <div>
-                              <h6 class="text-uppercase">Secure Payment</h6>
-                              <p class="mb-0 text-muted text-sm">Secure Payment</p>
+                              <h6 class="text-uppercase">安全付款</h6>
+                              <p class="mb-0 text-muted text-sm">安全付款</p>
                             </div>
                           </div>
                         </div>
@@ -308,7 +308,7 @@
               <use xlink:href="#close-1"> </use>
             </svg>
           </div>
-          <form action="#" class="search-area-form">
+          <form action="/search" action="get" class="search-area-form">
             <div class="form-group position-relative">
               <input type="search" name="search" id="search" placeholder="What are you looking for?" class="search-area-input">
               <button type="submit" class="search-area-button">
@@ -337,8 +337,8 @@
                 <use xlink:href="#delivery-time-1"> </use>
               </svg>
               <div class="service-text">
-                <h6 class="text-uppercase">Free shipping &amp; return</h6>
-                <p class="text-muted font-weight-light text-sm mb-0">Free Shipping over $300</p>
+                <h6 class="text-uppercase">免费快递</h6>
+                <p class="text-muted font-weight-light text-sm mb-0">满$300免邮</p>
               </div>
             </div>
             <div class="col-lg-4 service-column">
@@ -346,8 +346,8 @@
                 <use xlink:href="#money-1"> </use>
               </svg>
               <div class="service-text">
-                <h6 class="text-uppercase">Money back guarantee</h6>
-                <p class="text-muted font-weight-light text-sm mb-0">30 Days Money Back Guarantee</p>
+                <h6 class="text-uppercase">退款保证</h6>
+                <p class="text-muted font-weight-light text-sm mb-0">30天退款保证</p>
               </div>
             </div>
             <div class="col-lg-4 service-column">
@@ -356,7 +356,7 @@
               </svg>
               <div class="service-text">
                 <h6 class="text-uppercase">020-800-456-747</h6>
-                <p class="text-muted font-weight-light text-sm mb-0">24/7 Available Support</p>
+                <p class="text-muted font-weight-light text-sm mb-0">24小时客服</p>
               </div>
             </div>
           </div>

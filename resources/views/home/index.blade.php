@@ -47,7 +47,7 @@
         <div class="card border-0 text-white text-center"><img src="/homes/picture/christopher-campbell-28571-unsplash.jpg" alt="Card image" class="card-img">
           <div class="card-img-overlay d-flex align-items-center"> 
             <div class="w-100 py-3">
-              <h2 class="display-3 font-weight-bold mb-4">Top picks</h2><a href="category.html" class="btn btn-light">Shop now</a>
+              <h2 class="display-3 font-weight-bold mb-4">Top picks</h2>
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@
         <div class="card border-0 text-white text-center"><img src="/homes/picture/marco-xu-496929-unsplash.jpg" alt="Card image" class="card-img">
           <div class="card-img-overlay d-flex align-items-center"> 
             <div class="w-100 py-3">
-              <h2 class="display-3 font-weight-bold mb-4">New arrivals</h2><a href="category.html" class="btn btn-light">Shop now</a>
+              <h2 class="display-3 font-weight-bold mb-4">New arrivals</h2>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
         <div class="card border-0 text-center text-white"><img src="/homes/picture/benjamin-voros-260869-unsplash.jpg" alt="Card image" class="card-img">
           <div class="card-img-overlay d-flex align-items-center"> 
             <div class="w-100">
-              <h2 class="display-4 mb-4">Jackets</h2><a href="category.html" class="btn btn-link text-white">Shop now <i class="fa-arrow-right fa ml-2"></i></a>
+              <h2 class="display-4 mb-4">Jackets</h2>
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@
         <div class="card border-0 text-center text-white"><img src="/homes/picture/malvestida-magazine-458585-unsplash.jpg" alt="Card image" class="card-img">
           <div class="card-img-overlay d-flex align-items-center"> 
             <div class="w-100">
-              <h2 class="display-4 mb-4">Lookbook</h2><a href="category.html" class="btn btn-link text-white">Shop now <i class="fa-arrow-right fa ml-2"></i></a>
+              <h2 class="display-4 mb-4">Lookbook</h2>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@
         <div class="card border-0 text-center text-dark"><img src="/homes/picture/michael-frattaroli-221247-unsplash.jpg" alt="Card image" class="card-img">
           <div class="card-img-overlay d-flex align-items-center"> 
             <div class="w-100">
-              <h2 class="display-4 mb-4">Try this</h2><a href="category.html" class="btn btn-link text-dark">Shop now <i class="fa-arrow-right fa ml-2"></i></a>
+              <h2 class="display-4 mb-4">Try this</h2>
             </div>
           </div>
         </div>

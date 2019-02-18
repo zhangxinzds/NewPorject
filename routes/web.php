@@ -12,6 +12,7 @@
 */
 	//前台首页
 	Route::get('/','Home\IndexController@index');
+	Route::get('/search','Home\IndexController@search');
 	//注册
 	Route::get('/home/register','Home\RegisterController@register')->name('register');
 	Route::post('/home/doregister','Home\RegisterController@doregister')->name('doregister');

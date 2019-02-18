@@ -95,7 +95,7 @@
                         <form role="form" class="form-horizontal adminex-form" style="margin-top:20px">
                             <div class="form-group has-success">
 
-                    <input type="checkbox" class="quanxuan">全选
+                    <label><input type="checkbox" class="quanxuan">全选</label>
 
                             <label class="col-lg-1 control-label">角色</label>
                                 <div class="col-lg-2 input-group-lg">
