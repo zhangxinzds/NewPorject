@@ -3,10 +3,10 @@
 namespace App\Http\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
-use DB;
-class Size extends Model
+
+class Comment extends Model
 {
-    protected $table = 'size';
+    protected $table = 'comment';
 
     protected $primarykey = 'id';
 

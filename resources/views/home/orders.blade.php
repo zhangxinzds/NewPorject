@@ -24,6 +24,10 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-xl-9">
+          @php
+            $res = DB::table('orders')->where('uname',$user['name'])->get();
+          @endphp
+          @if(count($res) != 0)
             <table class="table table-borderless table-hover table-responsive-md">
               <thead class="bg-light">
                 <tr>
@@ -56,10 +60,7 @@
                         <button class="btn btn-warning operation">确认收货</button>
                     @break
                     @case('已收货')
-                        <button class="btn btn-success">去评价</button>
-                    @break
-                    @case('已评价')
-                        <button class="btn btn-danger">已完成</button>
+                        <button class="btn btn-success">已完成</button>
                     @break
                     @endswitch
                   </td>
@@ -67,6 +68,11 @@
                @endforeach
               </tbody>
             </table>
+          @else
+            <div style="margin-left:20%;margin-top:20%">
+                <h2 >尚未购买商品,暂无订单。</h2>
+            </div>
+          @endif
           </div>
           <!-- Customer Sidebar-->
           <div class="col-xl-3 col-lg-4 mb-5">
@@ -103,6 +109,8 @@
         </div>
       </div>
     </section>
+
+          
 @stop
 
 @section('js')
@@ -113,10 +121,8 @@
         var id = $(this).parent().attr('id');
         $.get('/home/status',{val:val,id:id},function(res){
             if(res == '已收货'){
-                that.text('去评价').removeClass('btn-warning').addClass('btn-success');
+                that.text('去评价').removeClass('btn-warning').removeClass('operation').addClass('btn-success');
                 that.parents('tr').find('.status').text('已收货');
-            }else{
-                alert('操作失败');
             }
         }) 
     })

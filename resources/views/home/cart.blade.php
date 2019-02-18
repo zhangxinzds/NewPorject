@@ -103,7 +103,7 @@
               </div>
                 <input type="text" value="{{$sum}}" class="sum" name="total" style="display:none">
             </div>
-            <div class="my-5 d-flex justify-content-between flex-column flex-lg-row"><a href="category.html" class="btn btn-link text-muted"><i class="fa fa-chevron-left"></i>继续购物</a><a><button class="btn btn-dark">去结算</button><i class="fa fa-chevron-right"></i></a></div>
+            <div class="my-5 d-flex justify-content-between flex-column flex-lg-row"><a class="btn btn-link text-muted"><i class="fa fa-chevron-left"></i></a><a><button class="btn btn-dark">去结算</button><i class="fa fa-chevron-right"></i></a></div>
                       </form>
           </div>
           <div class="col-lg-4">

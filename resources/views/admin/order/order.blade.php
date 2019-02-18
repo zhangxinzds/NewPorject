@@ -160,10 +160,7 @@
                                         <button class="btn btn-warning">待收货</button>
                                     @break
                                     @case('已收货')
-                                        <button class="btn btn-success">待评价</button>
-                                    @break
-                                    @case('已评价')
-                                        <button class="btn btn-danger">查看评价</button>
+                                        <button class="btn btn-success">已完成</button>
                                     @break
                                     @endswitch
                                 </td>
@@ -219,11 +216,8 @@
             if(res == '已发货'){
                 that.text('待收货').removeClass('btn-info').addClass('btn-warning');
                 that.parents('tr').find('.status').text('已发货');
-            }else{
-                alert('操作失败');
             }
         }) 
-       
     })
 </script>
 @stop

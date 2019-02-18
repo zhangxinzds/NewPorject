@@ -45,6 +45,7 @@
 		//订单管理
 		Route::get('/home/orders','Home\OrderController@index');
 		Route::get('/home/order/{id}','Home\OrderController@order');
+		Route::post('/home/comment','Home\OrderController@comment');
 		Route::get('/home/status','Home\OrderController@status');
 		Route::get('/home/cancel','Home\OrderController@cancel');
 		//信息管理

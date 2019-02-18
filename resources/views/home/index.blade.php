@@ -11,7 +11,7 @@
             <h5 class="text-uppercase text-white font-weight-light mb-4 letter-spacing-5"> Just arrived</h5>
             <h1 class="mb-5 display-2 font-weight-bold text-serif">Denim Jackets</h1>
             <p class="lead mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p> <a href="category.html" class="btn btn-light">View collection</a></p>
+
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
           <div class="col-lg-8 col-xl-6 mx-auto text-white text-center overlay-content">
             <h1 class="mb-4 display-2 text-uppercase font-weight-bold">Skeleton Tees</h1>
             <p class="lead mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p> <a href="category.html" class="btn btn-light">Start shopping</a></p>
+
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
           <div class="col-lg-8 col-xl-6 mx-auto text-white text-center">
             <h5 class="text-uppercase font-weight-light mb-4 letter-spacing-5"> Our bestseller</h5>
             <h1 class="mb-5 display-1 font-weight-bold text-serif">Skinny Jeans</h1>
-            <p> <a href="category.html" class="btn btn-light">View collection</a></p>
+
           </div>
         </div>
       </div>

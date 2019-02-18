@@ -11,7 +11,7 @@ class OrdersController extends Controller
     public function index()
     {
     	$order = Orders::all();
-    	$array = ['0'=>'未支付','1'=>'待发货','2'=>'已发货','3'=>'已收货','4'=>'已评价'];
+    	$array = ['0'=>'未支付','1'=>'待发货','2'=>'已发货','3'=>'已收货'];
 	    foreach($order as $k => $v){
 	    	$v['status'] = $array[$v['status']];
 	    }

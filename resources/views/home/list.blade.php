@@ -70,7 +70,7 @@
           <a data-toggle="collapse" href="#categoriesMenu" aria-expanded="false" aria-controls="categoriesMenu" class="d-lg-none block-toggler">Product Categories</a>
             <div id="categoriesMenu" class="expand-lg collapse">
               <div class="nav nav-pills flex-column mt-4 mt-lg-0">
-              <a href="#" class="nav-link d-flex justify-content-between mb-2 "><span>{{$ptype['name']}}</span><span class="sidebar-badge"> 120</span></a>
+              <a href="#" class="nav-link d-flex justify-content-between mb-2 "><span>{{$ptype['name']}}</span></a>
                 <div class="nav nav-pills flex-column ml-3">
                 @foreach($types as $k => $v)
 	                <a href="/home/list/{{$v['id']}}"  @if($v['name'] == $type) class="nav-link mb-2 active"@else class="nav-link mb-2" @endif>{{$v['name']}}</a>

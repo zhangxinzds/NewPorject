@@ -8,6 +8,9 @@ use App\Http\Model\Admin\Color;
 use App\Http\Model\Admin\Goods;
 use App\Http\Model\Admin\ColorImg;
 use App\Http\Model\Admin\Size;
+use App\Http\Model\Admin\Type;
+use App\Http\Model\Admin\User;
+use App\Http\Model\Admin\Comment;
 
 
 class DetailsController extends Controller
@@ -15,6 +18,8 @@ class DetailsController extends Controller
     public function index($id)
     {
     	$goods = Goods::find($id);
+        $type = Type::where('id',$goods['tid'])->first();
+        $typename = $type['name'];
     	$color = Color::where('gid',$id)->where('display',1)->get();
     	//如何商品没有添加颜色规格
     	if(!count($color)){
@@ -37,7 +42,8 @@ class DetailsController extends Controller
     	}
     	$cid = $color[0]['id'];
     	$colorimg = ColorImg::where('cid',$cid)->get();
-    	return view('home.details',['title'=>'商品详情页','color'=>$color,'colorimg'=>$colorimg,'goods'=>$goods]);
+        $comment = Comment::where('gid',$id)->orderBy('addtime','desc')->paginate(5);
+    	return view('home.details',['title'=>'商品详情页','color'=>$color,'colorimg'=>$colorimg,'goods'=>$goods,'typename'=>$typename,'comment'=>$comment]);
     }
 
     public function colorimgajax(Request $request)
