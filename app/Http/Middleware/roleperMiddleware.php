@@ -6,6 +6,7 @@ use Closure;
 use App\Http\Model\Admin\Manager;
 use App\Http\Model\Admin\Role;
 use App\Http\Model\Admin\Permission;
+
 class roleperMiddleware
 {
     /**
@@ -31,7 +32,7 @@ class roleperMiddleware
         }
 
         $info = array_unique($array);
-        
+
         $info[] = 'App\Http\Controllers\Admin\IndexController@index';
         $info[] = 'App\Http\Controllers\Admin\IndexController@header';
         $info[] = 'App\Http\Controllers\Admin\IndexController@mpassword';
@@ -42,6 +43,8 @@ class roleperMiddleware
         $info[] = 'App\Http\Controllers\Admin\LoginController@logout';
         $info[] = 'App\Http\Controllers\Admin\LoginController@logout';
         $info[] = 'App\Http\Controllers\Admin\LoginController@captcha';
+
+
         //怎么获取用户点击菜单的路径信息  perurl
         $rs = \Route::current()->getActionName();
 
@@ -50,10 +53,8 @@ class roleperMiddleware
             return $next($request);
 
         } else {
-            // return view('admin.user.remind');
-
             //如果角色没有权限  提示页面  没有权限不能访问
-            dump('没有权限');exit;
+           return response()->view('admin.remind',['title'=>'没有权限不能访问']);
 
         }       
     }

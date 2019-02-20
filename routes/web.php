@@ -51,7 +51,7 @@
 		//信息管理
 		Route::get('/home/pass','Home\ProController@pass');
 		Route::get('/home/header','Home\ProController@header');
-		Route::post('/home/hedit','Home\ProController@hedit');
+		Route::post('/home/hedit','H-;ome\ProController@hedit');
 		Route::post('/home/pedit','Home\ProController@pedit');
 		Route::get('/home/address','Home\ProController@address');
 		Route::post('/home/addressedit','Home\ProController@addressedit');
