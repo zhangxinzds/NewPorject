@@ -34,7 +34,9 @@ class LoginController extends Controller
 
 		}
 	//3.检测验证码
-		if($request->captcha != session('code')){
+        $cap = strtolower($request->captcha);
+        $code = strtolower(session('code'));
+		if($cap != $code){
 
 			return back()->with('captcha','验证码错误');
 
