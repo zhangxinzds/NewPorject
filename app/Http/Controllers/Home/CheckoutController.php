@@ -12,6 +12,7 @@ use App\Http\Model\Admin\OrderInfo;
 use App\Http\Model\Admin\Goods;
 use App\Http\Model\Admin\ColorImg;
 use App\Http\Model\Admin\Size;
+use DB;
 class CheckoutController extends Controller
 {
     public function index(Request $request)
@@ -27,7 +28,8 @@ class CheckoutController extends Controller
     	}
 
     	$user = User::with('info')->where('id',session('id'))->first();
-
+      $userinfo = DB::table('user_info')->where('uid',session('id'))->first();
+      $order['tname'] = $userinfo->tname;
     	$order['number'] = date('Ymdhis').substr(microtime(),2,4);
     	$order['uname'] = $user['name'];
     	$order['phone'] = $user['info']['phone'];
@@ -43,17 +45,9 @@ class CheckoutController extends Controller
 
     	$orderinfo = [];
    		foreach($rs as $key => $val){
-   			//更新size表中的库存
-   			$size = Size::where('id',$val['sid'])->first();
-   			$stock = $size['stock'];	
-   			
-   			$min = $stock - $val['num'];
-
-   			$ress = Size::where('id',$val['sid'])->update(['stock'=>$min]);
-
    			$ci = ColorImg::where('cid',$val['cid'])->first();
    			$color = Color::where('id',$val['cid'])->first();
-
+        $size = Size::where('id',$val['sid'])->first();
    			$ar['pic'] = $ci['pic'];
    			$ar['color'] = $color['color'];
    			$ar['sid'] = $val['sid'];
@@ -70,7 +64,7 @@ class CheckoutController extends Controller
    		//清除cart表和seesion('cart')中的商品
    		$rus = Cart::where('uid',session('id'))->delete();
    		\Session::forget('cart');
-   		if($res&&$ress&&$ru&&$rus){
+   		if($res&&$ru&&$rus){
 
    			return redirect('/home/checkout1/'.$id);
    			
@@ -92,7 +86,7 @@ class CheckoutController extends Controller
 
     public function checkout2($id)
     {
-    	$user = User::where('id',session('id'))->first();
+    	  $user = User::where('id',session('id'))->first();
         $name = $user['name'];
         $order = Orders::where('id',$id)->where('uname',$name)->where('status',0)->first();
         $orderinfo = OrderInfo::where('oid',$id)->get();

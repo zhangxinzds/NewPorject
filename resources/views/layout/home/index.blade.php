@@ -225,7 +225,8 @@
                     <!-- 未登录 -->
                     <div class="navbar-icon-link-badge">{{count(session('cart'))}}</div></a>
                     @endif
-                  <div aria-labelledby="cartdetails" class="dropdown-menu dropdown-menu-right p-4">
+                    <!-- 购物车 -->
+                  <div aria-labelledby="cartdetails" class="dropdown-menu dropdown-menu-right p-4" style="width:250px">
                     <div class="navbar-cart-product-wrapper">
                       <!-- cart item-->
                       <!-- 登录 -->
@@ -235,12 +236,13 @@
                                 @php  
                                   $img = ColorImg::where('cid',$v['cid'])->first();
                                   $color = Color::where('id',$v['cid'])->first();
+                                  $size = DB::table('size')->where('id',$v['sid'])->first();
                                   $gid = $color['gid'];
                                 @endphp
                                 <div class="navbar-cart-product"> 
                                   <div class="d-flex align-items-center"><a href="/home/details/{{$gid}}"><img src="{{$img['pic']}}" class="img-fluid navbar-cart-product-image"></a>
                                     <div class="w-100"><a href="#" class="close text-sm mr-2"><i class="fa fa-times"></i></a>
-                                      <div class="pl-3"> <a href="/home/details/{{$gid}}" class="navbar-cart-product-link">{{$v['name']}}</a><small class="d-block text-muted">数量:{{$v['num']}}</small><strong class="d-block text-sm">${{$v['price']}}</strong></div>
+                                      <div class="pl-3"> <a href="/home/details/{{$gid}}" class="navbar-cart-product-link">{{$v['name']}}</a><small class="d-block text-muted">颜色:{{$color->color}}</small><small class="d-block text-muted">尺寸:{{$size->size}}</small><small class="d-block text-muted">数量:{{$v['num']}}</small><strong class="d-block text-sm">${{$v['price']}}</strong></div>
                                     </div>
                                   </div>
                                 </div>
@@ -259,12 +261,13 @@
                           @php  
                             $img = ColorImg::where('cid',$v['cid'])->first();
                             $color = Color::where('id',$v['cid'])->first();
+                            $size = DB::table('size')->where('id',$v['sid'])->first();
                             $gid = $color['gid'];
                           @endphp
                           <div class="navbar-cart-product"> 
                             <div class="d-flex align-items-center"><a href="/home/details/{{$gid}}"><img src="{{$img['pic']}}" class="img-fluid navbar-cart-product-image"></a>
                               <div class="w-100"><a href="#" class="close text-sm mr-2"><i class="fa fa-times"></i></a>
-                                <div class="pl-3"> <a href="/home/details/{{$gid}}" class="navbar-cart-product-link">{{$v['name']}}</a><small class="d-block text-muted">数量:{{$v['num']}}</small><strong class="d-block text-sm">${{$v['price']}}</strong></div>
+                                <div class="pl-3"> <a href="/home/details/{{$gid}}" class="navbar-cart-product-link">{{$v['name']}}</a><small class="d-block text-muted">颜色:{{$color->color}}</small><small class="d-block text-muted">尺寸:{{$size->size}}</small><small class="d-block text-muted">数量:{{$v['num']}}</small><strong class="d-block text-sm">${{$v['price']}}</strong></div>
                               </div>
                             </div>
                           </div>

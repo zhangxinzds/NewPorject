@@ -9,12 +9,13 @@ use App\Http\Model\Admin\Comment;
 use App\Http\Model\Admin\Size;
 use App\Http\Model\Admin\Orders;
 use App\Http\Model\Admin\OrderInfo;
-
+use DB;
 class OrderController extends Controller
 {
     public function index()
     {
     	$user = User::where('id',session('id'))->first();
+        $userinfo = DB::table('user_info')->where('uid',session('id'))->first();
 	    $name = $user['name'];
 	    $order = Orders::where('uname',$name)->get();
 	    $num = Orders::where('uname',$user['name'])->count();
@@ -22,7 +23,7 @@ class OrderController extends Controller
 	    foreach($order as $k => $v){
 	    	$v['status'] = $array[$v['status']];
 	    }
-    	return view('home.orders',['title'=>'用户订单','order'=>$order,'user'=>$user,'num'=>$num]);
+    	return view('home.orders',['title'=>'用户订单','order'=>$order,'user'=>$user,'num'=>$num,'userinfo'=>$userinfo]);
     }
 
     public function order($id)

@@ -100,6 +100,11 @@ a:hover { text-decoration: none; }
             {{ session('success') }}
         </div>
       @endif
+      @if (session('error'))
+        <div class="alert alert-success" id="errormessage">
+            {{ session('error') }}
+        </div>
+      @endif
             <form action="/home/cart/addcart" method="post">
             {{csrf_field()}}
             	<input type="text" name="price" value="{{$goods['price']}}" hidden>
@@ -141,7 +146,6 @@ a:hover { text-decoration: none; }
                 <li class="list-inline-item">
                   <button type="submit" class="btn btn-dark btn-lg mb-1"> <i class="fa fa-shopping-cart mr-2"></i>添加至购物车</button>
                 </li>
-                <li class="list-inline-item"><a class="btn btn-outline-secondary mb-1"> <i class="far fa-heart mr-2"></i>加入收藏</a></li>
               </ul>
             </form>
           </div>
@@ -332,12 +336,12 @@ a:hover { text-decoration: none; }
 	})
 
 
-     $(".show_number li p").each(function(index, element) {
-        var num=$(this).attr("tip");
-        var www=num*2*16;
-        $(this).css("width",www);
-        $(this).parent(".atar_Show").siblings("span").text(num+"分");
-     });
+   $(".show_number li p").each(function(index, element) {
+      var num=$(this).attr("tip");
+      var www=num*2*16;
+      $(this).css("width",www);
+      $(this).parent(".atar_Show").siblings("span").text(num+"分");
+   });
 
 
     </script>

@@ -48,16 +48,17 @@
                   <div class="block-body">
                     <div class="row">
                       <div class="form-group col-md-6">
+                        <label for="phone" class="form-label">收货人</label>
+                        <input type="text" name="tname" @if($order['tname'] == '暂未填写') placeholder="暂未填写" required @else value="{{$order['tname']}}" @endif class="form-control">
+                      </div>
+                      <div class="form-group col-md-6">
                         <label for="phone" class="form-label">电话号码</label>
-                        <input type="text" name="phone" @if($order['phone'] == '暂未填写') placeholder="暂未填写" @else value="{{$order['phone']}}" @endif  id="phone" class="form-control" readonly>
+                        <input type="text" name="phone" @if($order['phone'] == '暂未填写') placeholder="暂未填写" required @else value="{{$order['phone']}}" @endif  id="phone" class="form-control">
                       </div>
                       <div class="form-group col-md-12">
                         <label for="address" class="form-label">送货地址</label>
-                        <input type="text" name="address"@if($order['address'] == '暂未填写') placeholder="暂未填写" @else value="{{$order['address']}}" @endif id="address" class="form-control" readonly>
+                        <input type="text" name="address"@if($order['address'] == '暂未填写') placeholder="暂未填写" required @else value="{{$order['address']}}" @endif id="address" class="form-control">
                       </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <a class="btn btn-outline-secondary" style="margin-left:-15px;margin-top:10px">修改</a>
                     </div>
                     <!-- /Invoice Address-->
                   </div>
@@ -88,9 +89,5 @@
 @section('js')
   <script>
     $('#errormessage').delay(2000).slideUp(1000);
-
-    $('.btn-outline-secondary').click(function(){
-        $('input').removeAttr('readonly');
-    })
   </script>
 @stop

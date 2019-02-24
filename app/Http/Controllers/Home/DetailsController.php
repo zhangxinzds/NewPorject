@@ -59,7 +59,7 @@ class DetailsController extends Controller
     {
     	$cid = $request->cid;
 
-    	$rs = Size::where('cid',$cid)->get();
+    	$rs = Size::where('cid',$cid)->where('stock','>',0)->get();
 
     	echo json_encode($rs);
     }

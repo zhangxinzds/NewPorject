@@ -39,6 +39,11 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+        'name' => 'required',
+        ],[
+        'name.required' => '请填写角色名'
+        ]);
         $rs = $request->name;
 
         $role['rolename'] = $rs;

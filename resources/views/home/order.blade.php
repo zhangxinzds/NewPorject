@@ -135,6 +135,12 @@ a:hover { text-decoration: none; }
               </div>
               <div class="col-md-6">
                 <div class="block-header">
+                  <h6 class="text-uppercase mb-0">收货人</h6>
+                </div>
+                <div class="block-body bg-light pt-1">
+                  <p>{{$or['tname']}}</p>
+                </div>
+                <div class="block-header">
                   <h6 class="text-uppercase mb-0">收货地址</h6>
                 </div>
                 <div class="block-body bg-light pt-1">

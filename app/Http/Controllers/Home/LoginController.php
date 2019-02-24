@@ -47,11 +47,12 @@ class LoginController extends Controller
     	//邮箱
     	$res = UserInfo::where('email',$request->email)->first();
     	$id = $res['uid'];
-    	$result = User::find($id);
+        //要邮箱验证之后才能登录
+    	$result = User::where('status','1')->where('id',$id)->first();
     	//用户名
-		$rs = User::where('name',$request->email)->first();
+		$rs = User::where('name',$request->email)->where('status','1')->first();
 
-		if(!($res||$rs)){
+		if(!($result||$rs)){
 
 			return back()->with('error','用户名或密码错误');
 
