@@ -151,7 +151,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                <button>保存</button>
+                                <button class="btn btn-info">保存</button>
                             </form>
                         </div>
                     </section>

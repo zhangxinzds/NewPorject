@@ -113,7 +113,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php $i = 1; @endphp @foreach($rs as $k=>$v)
+                            @php $i = 1; @endphp 
+                            @foreach($rs as $k=>$v)
+                                    <!-- root用户不显示 -->
+                                @php
+                                    if($v['name'] == 'root'){
+                                        continue;
+                                    }
+                                @endphp
                             <tr class="gradeA">
                                 <td style="line-height:50px">
                                     {{$i++}}

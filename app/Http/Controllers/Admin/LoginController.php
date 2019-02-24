@@ -20,7 +20,7 @@ class LoginController extends Controller
     {
 	//dump($request->all());
 	//1.检测用户名
-		$rs = Manager::where('name',$request->name)->first();
+		$rs = Manager::where('name',$request->name)->where('status','1')->first();
 
 		if(!$rs){
 

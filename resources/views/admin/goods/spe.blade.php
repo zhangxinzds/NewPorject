@@ -282,7 +282,7 @@
 //添加规格
 $('.addkucun').click(function(){
 	var table = $(this).parent().prev().children('table');
-	table.append('<tr><td style="height:25px;padding:2px"><i>型号</i>: <input style="width:80px;height:25px" type="text" value=""></td><td style="height:25px;padding:2px"><i>库存</i>: <input style="width:80px;height:25px" type="text" value=""></td><td style="height:25px;padding:2px;"><a style="height:25px;line-height:12px" class="btn btn-primary add">保存</a></td><td style="height:25px;padding:2px;"><a style="height:25px;line-height:12px" class="btn btn-danger remove" id="{{@$va['id']}}">删除</a></td></tr>')
+	table.append('<tr class="ptr"><td style="height:25px;padding:2px"><i>型号</i>: <input style="width:80px;height:25px" type="text" value=""></td><td style="height:25px;padding:2px"><i>库存</i>: <input style="width:80px;height:25px" type="text" value=""></td><td style="height:25px;padding:2px;"><a style="height:25px;line-height:12px" class="btn btn-primary add">保存</a></td><td style="height:25px;padding:2px;"><a style="height:25px;line-height:12px" class="btn btn-danger remove" id="{{@$va['id']}}">删除</a></td></tr>')
 })
 //规格添加ajax
 $('.add').live('click',function(){
@@ -299,7 +299,10 @@ $('.add').live('click',function(){
 			window.location.reload();
 			a.removeClass();
 			a.addClass('btn btn-info update');
-		}
+		}else{
+            alert('请填写正确格式');
+            a.parents('.ptr').remove();
+        }
 	})
 
 })

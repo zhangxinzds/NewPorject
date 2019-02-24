@@ -48,7 +48,7 @@ class IndexController extends Controller
 
     public function mpassword()
     {
-    	return view('admin.user.mpassword',['title'=>'修改密码']);
+    	return view('admin.manager.mpassword',['title'=>'修改密码']);
     }
 
     public function dompassword(Request $request)

@@ -19,7 +19,11 @@ class roleperMiddleware
     public function handle($request, Closure $next)
     {
         $manager = Manager::find(session('uid'));
-
+        $name = $manager['name'];
+        //root用户拥有所有权限
+        if($name == 'root'){
+            return $next($request);
+        }
         $role = $manager->role;
 
         $array = [];
@@ -32,12 +36,11 @@ class roleperMiddleware
         }
 
         $info = array_unique($array);
-
+        //一些默认给与的权限
         $info[] = 'App\Http\Controllers\Admin\IndexController@index';
         $info[] = 'App\Http\Controllers\Admin\IndexController@header';
         $info[] = 'App\Http\Controllers\Admin\IndexController@mpassword';
         $info[] = 'App\Http\Controllers\Admin\IndexController@dompassword';
-
         $info[] = 'App\Http\Controllers\Admin\LoginController@login';
         $info[] = 'App\Http\Controllers\Admin\LoginController@dologin';
         $info[] = 'App\Http\Controllers\Admin\LoginController@logout';

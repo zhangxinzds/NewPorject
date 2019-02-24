@@ -85,9 +85,16 @@ class PerController extends Controller
     public function managerroleadd(Request $request,$id)
     {
         $rs = $request->only('role');
+        if(count($rs)==0){
+            $result = DB::table('user_role')->where('user_id',$id)->delete();
+            if($result){
+                return back()->with('success','保存成功');
+            }else{
+                return back()->with('error','保存失败');
+            }
+        }
 
         $array = [];
-
         foreach($rs['role'] as $k => $v){
             $arr = [];
             $arr['user_id'] = $id;

@@ -181,7 +181,7 @@
                                 {{method_field('DELETE')}}
                                     <button class="btn btn-warning" onclick="confirm('确定删除?')" style="margin-left:30px">删除</button>
                                 </form>
-                                <a href="/admin/peradd/{{$v['id']}}" class="btn btn-info" style="float:right;position:relative;right:387px;width:122px">添加权限</a>
+                                <a href="/admin/peradd/{{$v['id']}}" class="btn btn-info" style="float:right;position:relative;right:387px;width:122px">分配权限</a>
                                 </td>
 	                        </tr>
                             @endforeach

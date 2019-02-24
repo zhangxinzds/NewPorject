@@ -21,9 +21,9 @@
         </ul>
     </li>
 
-    <li class="menu-list nav-active"><a href=""><i class="fa fa-users"></i> <span>用户管理</span></a>
+    <li class="menu-list"><a href=""><i class="fa fa-users"></i> <span>用户管理</span></a>
         <ul class="sub-menu-list">
-            <li class="active"><a class="menuchild" href="/admin/user">用户列表</a></li>
+            <li><a class="menuchild" href="/admin/user">用户列表</a></li>
             <li><a class="menuchild" href="/admin/user/create">用户添加</a></li>
         </ul>
     </li>

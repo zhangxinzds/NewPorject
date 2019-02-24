@@ -348,10 +348,15 @@ class GoodsController extends Controller
     {
         $arr['cid'] = $request->cid;
         $arr['stock'] = $request->stock;
+        if($arr['stock'] <= 0){
+            echo 2;exit;
+        }
         $arr['size'] = $request->size;
         $res = Size::insert($arr);
         if($res){
             echo 1;
+        }else{
+            echo 2;
         }
         
     }
