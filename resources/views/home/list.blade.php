@@ -20,22 +20,6 @@
       <div class="row">
         <!-- Grid -->
         <div class="products-grid col-xl-9 col-lg-8 order-lg-2">
-          <header class="product-grid-header">
-            <div class="mr-3 mb-3">
-               
-              Showing <strong>1-12 </strong>of <strong>158 </strong>products
-            </div>
-            <div class="mr-3 mb-3"><span class="mr-2">Show</span><a href="#" class="product-grid-header-show active">12    </a><a href="#" class="product-grid-header-show ">24    </a><a href="#" class="product-grid-header-show ">All    </a>
-            </div>
-            <div class="mb-3 d-flex align-items-center"><span class="d-inline-block mr-1">Sort by</span>
-              <select class="custom-select w-auto border-0">
-                <option value="orderby_0">Default</option>
-                <option value="orderby_1">Popularity</option>
-                <option value="orderby_2">Rating</option>
-                <option value="orderby_3">Newest first</option>
-              </select>
-            </div>
-          </header>
             <!-- product-->
           <div class="row">
             @foreach($goods as $k => $v)
@@ -81,240 +65,63 @@
 
           <div class="sidebar-block px-3 px-lg-0 mr-lg-4"><a data-toggle="collapse" href="#priceFilterMenu" aria-expanded="false" aria-controls="priceFilterMenu" class="d-lg-none block-toggler">Filter by price</a>
             <div id="priceFilterMenu" class="expand-lg collapse">
-              <h6 class="sidebar-heading d-none d-lg-block">Price  </h6>
+              <h6 class="sidebar-heading d-none d-lg-block">价格范围</h6>
               <div id="slider-snap" class="mt-4 mt-lg-0"> </div>
               <div class="nouislider-values">
-                <div class="min">From $<span id="slider-snap-value-lower"></span></div>
-                <div class="max">To $<span id="slider-snap-value-upper"></span></div>
+                <div class="min">$<span id="slider-snap-value-lower"></span></div>
+                <div class="max">$<span id="slider-snap-value-upper"></span></div>
               </div>
             </div>
           </div>
           <div class="sidebar-block px-3 px-lg-0 mr-lg-4"><a data-toggle="collapse" href="#brandFilterMenu" aria-expanded="true" aria-controls="brandFilterMenu" class="d-lg-none block-toggler">Filter by brand</a>
             <!-- Brand filter menu - this menu has .show class, so is expanded by default-->
             <div id="brandFilterMenu" class="expand-lg collapse show">
-              <h6 class="sidebar-heading d-none d-lg-block">Brands </h6>
-              <form action="#" class="mt-4 mt-lg-0"> 
+              <h6 class="sidebar-heading d-none d-lg-block">品牌</h6>
+              <form action="/home/list/{{$id}}" method="get" class="mt-4 mt-lg-0"> 
+              @php
+                $brand = isset($_GET['brand'])?$_GET['brand']:$company;
+              @endphp
+              @foreach($company as $k => $v)
                 <div class="form-group mb-1">
                   <div class="custom-control custom-checkbox">
-                    <input id="brand0" type="checkbox" name="clothes-brand" checked class="custom-control-input">
-                    <label for="brand0" class="custom-control-label">Calvin Klein <small>(18)</small></label>
+                    <input id="brand{{$k}}" type="checkbox" name="brand[]" value="{{$v}}" @if($brand != $company)  @if(in_array($v,$brand)) checked @endif @endif class="custom-control-input">
+                    <label for="brand{{$k}}" class="custom-control-label">{{$v}}</label>
                   </div>
                 </div>
-                <div class="form-group mb-1">
-                  <div class="custom-control custom-checkbox">
-                    <input id="brand1" type="checkbox" name="clothes-brand" checked class="custom-control-input">
-                    <label for="brand1" class="custom-control-label">Levi Strauss <small>(30)</small></label>
-                  </div>
-                </div>
-                <div class="form-group mb-1">
-                  <div class="custom-control custom-checkbox">
-                    <input id="brand2" type="checkbox" name="clothes-brand" class="custom-control-input">
-                    <label for="brand2" class="custom-control-label">Hugo Boss <small>(120)</small></label>
-                  </div>
-                </div>
-                <div class="form-group mb-1">
-                  <div class="custom-control custom-checkbox">
-                    <input id="brand3" type="checkbox" name="clothes-brand" class="custom-control-input">
-                    <label for="brand3" class="custom-control-label">Tomi Hilfiger <small>(70)</small></label>
-                  </div>
-                </div>
-                <div class="form-group mb-1">
-                  <div class="custom-control custom-checkbox">
-                    <input id="brand4" type="checkbox" name="clothes-brand" class="custom-control-input">
-                    <label for="brand4" class="custom-control-label">Tom Ford  <small>(110)</small></label>
-                  </div>
-                </div>
+              @endforeach
+          <button class="btn btn-outline-secondary">搜索</button>
+          <input type="text" name="lower" class="lowerprice" value="" hidden>
+          <input type="text" name="upper" class="upperprice" value="" hidden>
               </form>
-            </div>
+            </div>   
           </div>
-          <div class="sidebar-block px-3 px-lg-0 mr-lg-4"> <a data-toggle="collapse" href="#sizeFilterMenu" aria-expanded="false" aria-controls="sizeFilterMenu" class="d-lg-none block-toggler">Filter by size</a>
-            <!-- Size filter menu-->
-            <div id="sizeFilterMenu" class="expand-lg collapse"> 
-              <h6 class="sidebar-heading d-none d-lg-block">Size </h6>
-              <form action="#" class="mt-4 mt-lg-0">  
-                <div class="form-group mb-1">
-                  <div class="custom-control custom-radio">
-                    <input id="size0" type="radio" name="size" checked class="custom-control-input">
-                    <label for="size0" class="custom-control-label">Small</label>
-                  </div>
-                </div>
-                <div class="form-group mb-1">
-                  <div class="custom-control custom-radio">
-                    <input id="size1" type="radio" name="size" class="custom-control-input">
-                    <label for="size1" class="custom-control-label">Medium</label>
-                  </div>
-                </div>
-                <div class="form-group mb-1">
-                  <div class="custom-control custom-radio">
-                    <input id="size2" type="radio" name="size" class="custom-control-input">
-                    <label for="size2" class="custom-control-label">Large</label>
-                  </div>
-                </div>
-                <div class="form-group mb-1">
-                  <div class="custom-control custom-radio">
-                    <input id="size3" type="radio" name="size" class="custom-control-input">
-                    <label for="size3" class="custom-control-label">X-Large</label>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="sidebar-block px-3 px-lg-0 mr-lg-4"><a data-toggle="collapse" href="#colourFilterMenu" aria-expanded="false" aria-controls="colourFilterMenu" class="d-lg-none block-toggler">Filter by colour</a>
-            <!-- Size filter menu-->
-            <div id="colourFilterMenu" class="expand-lg collapse">
-              <h6 class="sidebar-heading d-none d-lg-block">Colour </h6>
-              <div class="mt-4 mt-lg-0"> 
-                <ul class="list-inline mb-0 colours-wrapper">
-                  <li class="list-inline-item">
-                    <label for="colour_sidebar_Blue" style="background-color: #668cb9" data-allow-multiple class="btn-colour"> </label>
-                    <input type="checkbox" name="colour" value="value_sidebar_Blue" id="colour_sidebar_Blue" class="input-invisible">
-                  </li>
-                  <li class="list-inline-item">
-                    <label for="colour_sidebar_White" style="background-color: #fff" data-allow-multiple class="btn-colour"> </label>
-                    <input type="checkbox" name="colour" value="value_sidebar_White" id="colour_sidebar_White" class="input-invisible">
-                  </li>
-                  <li class="list-inline-item">
-                    <label for="colour_sidebar_Violet" style="background-color: #8b6ea4" data-allow-multiple class="btn-colour"> </label>
-                    <input type="checkbox" name="colour" value="value_sidebar_Violet" id="colour_sidebar_Violet" class="input-invisible">
-                  </li>
-                  <li class="list-inline-item">
-                    <label for="colour_sidebar_Red" style="background-color: #dd6265" data-allow-multiple class="btn-colour"> </label>
-                    <input type="checkbox" name="colour" value="value_sidebar_Red" id="colour_sidebar_Red" class="input-invisible">
-                  </li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
         <!-- /Sidebar end-->
       </div>
     </div>
-    <!--快速浏览窗口-->
-    <div id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade quickview">
-      <div role="document" class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <button type="button" data-dismiss="modal" aria-label="Close" class="close modal-close">
-            <svg class="svg-icon w-100 h-100 svg-icon-light align-middle">
-              <use xlink:href="#close-1"> </use>
-            </svg>
-          </button>
-          <div class="modal-body"> 
-            <div class="ribbon ribbon-primary">Sale</div>
-            <div class="row">
-              <div class="col-lg-6">
-                <div data-slider-id="1" class="owl-carousel owl-theme owl-dots-modern detail-full">
-                  <div style="background: center center url('/homes/images/kyle-loftus-596319-detail-1.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
-                  <div style="background: center center url('/homes/images/kyle-loftus-596319-detail-2.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
-                  <div style="background: center center url('/homes/images/kyle-loftus-596319-detail-3.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
-                  <div style="background: center center url('/homes/images/kyle-loftus-594535-unsplash-detail-3.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
-                  <div style="background: center center url('/homes/images/kyle-loftus-594535-unsplash-detail-4.jpg') no-repeat; background-size: cover;" class="detail-full-item-modal">  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 d-flex align-items-center">
-                <div>
-                  <h2 class="mb-4 mt-4 mt-lg-1">Modern Jacket</h2>
-                  <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-sm-between mb-4">
-                    <ul class="list-inline mb-2 mb-sm-0">
-                      <li class="list-inline-item h4 font-weight-light mb-0">$65.00</li>
-                      <li class="list-inline-item text-muted font-weight-light"> 
-                        <del>$90.00</del>
-                      </li>
-                    </ul>
-                    <div class="d-flex align-items-center">
-                      <ul class="list-inline mr-2 mb-0">
-                        <li class="list-inline-item mr-0"><i class="fa fa-star text-primary"></i></li>
-                        <li class="list-inline-item mr-0"><i class="fa fa-star text-primary"></i></li>
-                        <li class="list-inline-item mr-0"><i class="fa fa-star text-primary"></i></li>
-                        <li class="list-inline-item mr-0"><i class="fa fa-star text-primary"></i></li>
-                        <li class="list-inline-item mr-0"><i class="fa fa-star text-gray-300"></i></li>
-                      </ul><span class="text-muted text-uppercase text-sm">25 reviews</span>
-                    </div>
-                  </div>
-                  <p class="mb-4 text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
-                  <form action="#">
-                    <div class="row">
-                      <div class="col-sm-6 col-lg-12 detail-option mb-3">
-                        <h6 class="detail-option-heading">Size <span>(required)</span></h6>
-                        <label for="size_0" class="btn btn-sm btn-outline-secondary detail-option-btn-label">
-                           
-                          Small
-                          <input type="radio" name="size" value="value_0" id="size_0" required class="input-invisible">
-                        </label>
-                        <label for="size_1" class="btn btn-sm btn-outline-secondary detail-option-btn-label">
-                           
-                          Medium
-                          <input type="radio" name="size" value="value_1" id="size_1" required class="input-invisible">
-                        </label>
-                        <label for="size_2" class="btn btn-sm btn-outline-secondary detail-option-btn-label">
-                           
-                          Large
-                          <input type="radio" name="size" value="value_2" id="size_2" required class="input-invisible">
-                        </label>
-                      </div>
-                      <div class="col-sm-6 col-lg-12 detail-option mb-3">
-                        <h6 class="detail-option-heading">Type <span>(required)</span></h6>
-                        <label for="material_0" class="btn btn-sm btn-outline-secondary detail-option-btn-label">
-                           
-                          Hoodie
-                          <input type="radio" name="material" value="value_0" id="material_0" required class="input-invisible">
-                        </label>
-                        <label for="material_1" class="btn btn-sm btn-outline-secondary detail-option-btn-label">
-                           
-                          College
-                          <input type="radio" name="material" value="value_1" id="material_1" required class="input-invisible">
-                        </label>
-                      </div>
-                      <div class="col-12 detail-option mb-3">
-                        <h6 class="detail-option-heading">Colour <span>(required)</span></h6>
-                        <ul class="list-inline mb-0 colours-wrapper">
-                          <li class="list-inline-item">
-                            <label for="colour_Blue" style="background-color: #668cb9" class="btn-colour"> </label>
-                            <input type="radio" name="colour" value="value_Blue" id="colour_Blue" required class="input-invisible">
-                          </li>
-                          <li class="list-inline-item">
-                            <label for="colour_White" style="background-color: #fff" class="btn-colour"> </label>
-                            <input type="radio" name="colour" value="value_White" id="colour_White" required class="input-invisible">
-                          </li>
-                          <li class="list-inline-item">
-                            <label for="colour_Violet" style="background-color: #8b6ea4" class="btn-colour"> </label>
-                            <input type="radio" name="colour" value="value_Violet" id="colour_Violet" required class="input-invisible">
-                          </li>
-                          <li class="list-inline-item">
-                            <label for="colour_Red" style="background-color: #dd6265" class="btn-colour"> </label>
-                            <input type="radio" name="colour" value="value_Red" id="colour_Red" required class="input-invisible">
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="col-12 detail-option mb-5">
-                        <label class="detail-option-heading font-weight-bold">Items <span>(required)</span></label>
-                        <input name="items" type="number" value="1" class="form-control detail-quantity">
-                      </div>
-                    </div>
-                    <ul class="list-inline">
-                      <li class="list-inline-item">
-                        <button type="submit" class="btn btn-dark btn-lg mb-1"> <i class="fa fa-shopping-cart mr-2"></i>Add to Cart</button>
-                      </li>
-                      <li class="list-inline-item"><a href="#" class="btn btn-outline-secondary mb-1"> <i class="far fa-heart mr-2"></i>Add to wishlist</a></li>
-                    </ul>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
 @stop
 @section('js')
 
 
 <script>
+      //获取url地址中的参数
+      function Get(name) { 
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+        var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
+        var context = ""; 
+        if (r != null) 
+        context = r[2]; 
+        reg = null; 
+        r = null; 
+        return context == null || context == "" || context == "undefined" ? "" : context; 
+      }
 
       var snapSlider = document.getElementById('slider-snap');
-      
+      var lower = Get('lower')?Get('lower'):10;
+      var upper = Get('upper')?Get('upper'):140;
       noUiSlider.create(snapSlider, {
-      	start: [ 40, 110 ],
+      	start: [ lower, upper ],
       	snap: false,
       	connect: true,
           step: 1,
@@ -329,6 +136,8 @@
       ];
       snapSlider.noUiSlider.on('update', function( values, handle ) {
       	snapValues[handle].innerHTML = values[handle];
+        $('.lowerprice').val(values[0]);
+        $('.upperprice').val(values[1]);
       });
       
     </script>

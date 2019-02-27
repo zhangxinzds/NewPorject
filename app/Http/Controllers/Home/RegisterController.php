@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\http\Model\Admin\User;
-use App\http\Model\Admin\UserInfo;
+use App\Http\Model\Admin\User;
+use App\Http\Model\Admin\UserInfo;
 use Hash;
 use Mail;
 

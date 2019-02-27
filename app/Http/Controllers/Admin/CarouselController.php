@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\http\Model\Admin\Carousel;
+use App\Http\Model\Admin\Carousel;
 class CarouselController extends Controller
 {
     /**

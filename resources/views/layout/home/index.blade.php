@@ -218,13 +218,21 @@
                         $cart = DB::table('cart')->where('uid',session('id'))->count();
                         $carts = Cart::where('uid',session('id'))->get(); 
                     @endphp
+                      @if($cart == 0)
+
+                      @else
                     <div class="navbar-icon-link-badge">{{$cart}}</div></a>
+                      @endif
                     @else
                     <!-- 未登录 -->
-                    <div class="navbar-icon-link-badge">{{count(session('cart'))}}</div></a>
+                      @if(count(session('cart')) == 0)
+
+                      @else
+                      <div class="navbar-icon-link-badge">{{count(session('cart'))}}</div></a>
+                      @endif
                     @endif
                     <!-- 购物车 -->
-                  <div aria-labelledby="cartdetails" class="dropdown-menu dropdown-menu-right p-4" style="width:250px">
+                  <div aria-labelledby="cartdetails" class="dropdown-menu dropdown-menu-right p-4" style="width:200px">
                     <div class="navbar-cart-product-wrapper">
                       <!-- cart item-->
                       <!-- 登录 -->
@@ -281,7 +289,7 @@
                       @endif
                     <!-- total price-->
                     <!-- buttons-->
-                    <div class="d-flex justify-content-between"><a href="{{route('cart')}}" class="btn btn-outline-dark">查看购物车</a></div>
+                    <div class="d-flex justify-content-between"  style="float: left"><a href="{{route('cart')}}" class="btn btn-outline-dark">查看购物车</a></div>
                     @if(session('id'))
                       @php
                         $user = User::where('id',session('id'))->first();
