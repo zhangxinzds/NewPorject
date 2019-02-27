@@ -4,13 +4,13 @@
     <section class="hero">
       <div class="container">
         <!-- Breadcrumbs -->
-        <ol class="breadcrumb justify-content-center">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Customer zone</li>
-        </ol>
+<!--         <ol class="breadcrumb justify-content-center">
+  <li class="breadcrumb-item"><a href="/">主页</a></li>
+  <li class="breadcrumb-item active">用户注册</li>
+</ol> -->
         <!-- Hero Content-->
         <div class="hero-content pb-5 text-center">
-          <h1 class="hero-heading mb-0">Customer zone</h1>
+          <h1 class="hero-heading mb-0">注册</h1>
         </div>
       </div>
     </section>
@@ -21,7 +21,7 @@
           <div class="col-lg-5">
             <div class="block">
               <div class="block-header">
-                <h6 class="text-uppercase mb-0">新账户注册</h6>
+                <h6 class="text-uppercase mb-0">注册<a href="{{route('login')}}">登录</a></h6>
               </div>
               <div class="block-body"> 
                 @if (count($errors) > 0)
@@ -33,9 +33,7 @@
         			     </ul>
     			      </div>
 				        @endif
-                <p class="lead">未注册账户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已注册,去<a href="{{route('login')}}">登陆</a></p>
                 <p class="text-muted">随着我们注册新的时尚世界，梦幻般的折扣和更多打开给你！整个过程不会超过一分钟！</p>
-                <p class="text-muted">如果您有任何疑问，请随时<a href="contact.html">与我们联系</a>,我们的客户服务中心全天候为您服务。</p>
                 <hr>
                 <form action="{{route('doregister')}}" method="post">
                 {{csrf_field()}}

@@ -3,14 +3,9 @@
 @section('content')
     <section class="hero">
       <div class="container">
-        <!-- Breadcrumbs -->
-        <ol class="breadcrumb justify-content-center">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Customer zone</li>
-        </ol>
         <!-- Hero Content-->
         <div class="hero-content pb-5 text-center">
-          <h1 class="hero-heading mb-0">Customer zone</h1>
+          <h1 class="hero-heading mb-0">登录</h1>
         </div>
       </div>
     </section>
@@ -21,7 +16,7 @@
           <div class="col-lg-5">
             <div class="block">
               <div class="block-header">
-                <h6 class="text-uppercase mb-0">登录</h6>
+                <h6 class="text-uppercase mb-0">登录 <a href="{{route('register')}}">注册</a></h6>
               </div>
               <div class="block-body">
                 @if (count($errors) > 0)
@@ -48,7 +43,6 @@
                         {{ session('captcha')}}
                     </div>
                 @endif
-                <p class="lead">已注册账户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未注册,去<a href="{{route('register')}}">注册</a></p>
                 <p class="text-muted">欢迎光临我们的网站,在这里你可以轻松便捷地购物!</p>
                 <hr>
                 <form action="/home/dologin" method="post">
@@ -63,7 +57,7 @@
                   <div class="form-group" style="width:300px">
                     <label for="captcha" class="form-label">验证码</label>
                     <input id="captcha" type="text" name="captcha" class="form-control">
-                     <img src="{{route('hcaptcha')}}" style="position: absolute;left:345px;top:373px;border-radius:5px" onclick='this.src=this.src += "?1"'>
+                     <img src="{{route('hcaptcha')}}" style="position: absolute;left:343px;top:327px;border-radius:5px" onclick='this.src=this.src += "?1"'>
                   </div>
                   <div class="form-group text-center">
                   {{csrf_field()}}

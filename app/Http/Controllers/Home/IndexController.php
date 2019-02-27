@@ -32,9 +32,14 @@ class IndexController extends Controller
     	$ptype['id'] = $result['id'];
     	//商品
     	$goods = Goods::with('imgs')->where('name','like','%'.$search.'%')->where('tid',$id)->where('status',1)->paginate(6);
-    	/*dump($goods[0]['imgs'][0]['pic']);exit;*/
-
-    	return view('home.list',['title'=>'列表页','type'=>$type,'types'=>$types,'ptype'=>$ptype,'goods'=>$goods]);
+    	//拿到商品厂家
+        $res = Goods::where('tid',$id)->get();
+        $arr = [];
+        foreach($res as $k => $v){
+            $arr[] = $v['company'];
+        }
+        $company = array_unique($arr);
+    	return view('home.list',['title'=>'列表页','type'=>$type,'types'=>$types,'ptype'=>$ptype,'goods'=>$goods,'id'=>$id,'company'=>$company]);
 	}
 
 }

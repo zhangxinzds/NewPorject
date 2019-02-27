@@ -42,7 +42,7 @@
                 <li class="list-inline-item pr-3 mr-0">
                   <svg class="svg-icon mr-2">
                     <use xlink:href="#calls-1"> </use>
-                  </svg>020-800-456-747
+                  </svg>180-1843-6941
                 </li>
                 <li class="list-inline-item px-3 border-left d-none d-lg-inline-block">订单满$300免运费</li>
               </ul>
@@ -131,7 +131,7 @@
                             </svg>
                             <div>
                               <h6 class="text-uppercase">退款保证</h6>
-                              <p class="mb-0 text-muted text-sm">30天退款>
+                              <p class="mb-0 text-muted text-sm">30天退款
                             </div>
                           </div>
                         </div>
@@ -141,7 +141,7 @@
                               <use xlink:href="#customer-support-1"> </use>
                             </svg>
                             <div>
-                              <h6 class="text-uppercase">020-800-456-747</h6>
+                              <h6 class="text-uppercase">180-6843-6941</h6>
                               <p class="mb-0 text-muted text-sm">24小时客服</p>
                             </div>
                           </div>

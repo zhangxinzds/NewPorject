@@ -11,7 +11,7 @@
         <div class="hero-content pb-5 text-center">
           <h2 class="hero-heading">{{$type}}</h2>
           <div class="row">   
-            <div class="col-xl-8 offset-xl-2"><p class="lead text-muted">欢迎来到鑫鑫的购物网站</p></div>
+            <div class="col-xl-8 offset-xl-2"><p class="lead text-muted">欢迎来极速购!</p></div>
           </div>
         </div>
       </div>
@@ -41,8 +41,6 @@
             @endforeach
           </div>
             <!-- /product-->
-
-
           <nav aria-label="page navigation" class="d-flex justify-content-center mb-5 mt-3">       
             {{$goods->links('common.pagination')}}
           </nav>
